@@ -49,6 +49,7 @@ architecture game_arch of Box is
 	------------------Signal Declarations-----------------------------------------
 	--============================================================================
 	signal pixel_ux, pixel_uy : UNSIGNED(9 downto 0);
+	signal posXPix, posYPix : UNSIGNED(9 downto 0);
 	signal background_color : STD_LOGIC_VECTOR(7 downto 0);
 	signal number_color : STD_LOGIC_VECTOR(7 downto 0);
 	signal draw_number : STD_LOGIC;
@@ -91,27 +92,27 @@ begin
 		case value is
 			when "000000000000" =>      
 			when "000000000010" =>
-				 if(pixel_ux >= 30 and pixel_ux < 60) then
-						if((pixel_uy >= 24 and pixel_uy < 30) or
-							(pixel_uy >= 42 and pixel_uy < 48) or
-							(pixel_uy >= 69 and pixel_uy < 66)) then
+				 if(posXPix >= 30 and posXPix < 60) then
+						if((posYPix >= 24 and posYPix < 30) or
+							(posYPix >= 42 and posYPix < 48) or
+							(posYPix >= 69 and posYPix < 66)) then
 							number_color <= "11111111";
 							draw_number <= '1';
 						end if;
 				end if;
 			when "000000000100" =>
-				if(pixel_ux >= 36 and pixel_ux < 53) then
-						if(pixel_uy >=42 and pixel_uy < 48) then
+				if(posXPix >= 36 and posXPix < 53) then
+						if(posYPix >=42 and posYPix < 48) then
 							number_color <= "11111111";
 							draw_number <= '1';
 						end if;
-				elsif(pixel_ux >= 39 and pixel_ux < 36) then
-						if(pixel_uy >= 42 and pixel_uy < 66) then
+				elsif(posXPix >= 39 and posXPix < 36) then
+						if(posYPix >= 42 and posYPix < 66) then
 							number_color <= "11111111";
 							draw_number <= '1';
 						end if;
-				elsif(pixel_ux >= 54 and pixel_ux < 60) then
-						if(pixel_uy >= 24 and pixel_uy < 66) then
+				elsif(posXPix >= 54 and posXPix < 60) then
+						if(posYPix >= 24 and posYPix < 66) then
 							number_color <= "11111111";
 							draw_number <= '1';
 						end if;
@@ -151,6 +152,8 @@ begin
 	--============================================================================
 	pixel_ux <= UNSIGNED(pixel_x);
 	pixel_uy <= UNSIGNED(pixel_y);
+	posXPix <= pixel_ux - XPOS;
+	posYPix <= pixel_uy - YPOS;
 	
 end game_arch;
 
