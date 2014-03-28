@@ -93,11 +93,28 @@ begin
 						if((pixel_uy >= 24 and pixel_uy < 30) or
 							(pixel_uy >= 42 and pixel_uy < 48) or
 							(pixel_uy >= 69 and pixel_uy < 66)) then
-							number_color <= "00000000";
+							number_color <= "11111111";
 							drawNumber <= '1';
 						end if;
 				end if;
 			when 4 =>
+				if(pixel_ux >= 36 and pixel_ux < 53) then
+						if(pixel_uy >=42 and pixel_uy < 48) then
+							number_color <= "11111111";
+							drawNumber <= '1';
+						end if;
+				elsif(pixel_ux >= 39 and pixel_ux < 36) then
+						if(pixel_uy >= 42 and pixel_uy < 66) then
+							number_color <= "11111111";
+							drawNumber <= '1';
+						end if;
+				elsif(pixel_ux >= 54 and pixel_ux < 60) then
+						if(pixel_uy >= 24 and pixel_uy < 66) then
+							number_color <= "11111111";
+							drawNumber <= '1';
+						end if;
+				end if;
+				         
 			when 8 =>         
 			when 16 =>
 			when 32 =>
