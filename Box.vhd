@@ -29,8 +29,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Box is
 	generic(
-		XPOS : in NATURAL(9 downto 0);
-		YPOS : in NATURAL(9 downto 0)
+		XPOS : in NATURAL;
+		YPOS : in NATURAL
 	);
 	port(
 		pixel_x : in STD_LOGIC_VECTOR(9 downto 0);
@@ -56,7 +56,7 @@ architecture game_arch of Box is
 	--============================================================================
 	------------------Constant Declarations---------------------------------------
 	--============================================================================
-	constant DIMENSIONS : UNSIGNED(9 downto 0) := 90;
+	constant DIMENSIONS : UNSIGNED(9 downto 0) := TO_UNSIGNED(90, 10);
 	constant MAX_X : UNSIGNED(9 downto 0) := XPOS + DIMENSIONS - 1;
 	constant MAX_Y : UNSIGNED(9 downto 0) := YPOS + DIMENSIONS - 1;
 	
@@ -86,43 +86,53 @@ begin
 		
 	process(value, pixel_x, pixel_y)
 	begin
+		draw_number <= '0';
+		number_color <= "00000000";
 		case value is
-			when 0 =>      
-			when 2 =>
+			when "000000000000" =>      
+			when "000000000010" =>
 				 if(pixel_ux >= 30 and pixel_ux < 60) then
 						if((pixel_uy >= 24 and pixel_uy < 30) or
 							(pixel_uy >= 42 and pixel_uy < 48) or
 							(pixel_uy >= 69 and pixel_uy < 66)) then
 							number_color <= "11111111";
-							drawNumber <= '1';
+							draw_number <= '1';
 						end if;
 				end if;
-			when 4 =>
+			when "000000000100" =>
 				if(pixel_ux >= 36 and pixel_ux < 53) then
 						if(pixel_uy >=42 and pixel_uy < 48) then
 							number_color <= "11111111";
-							drawNumber <= '1';
+							draw_number <= '1';
 						end if;
 				elsif(pixel_ux >= 39 and pixel_ux < 36) then
 						if(pixel_uy >= 42 and pixel_uy < 66) then
 							number_color <= "11111111";
-							drawNumber <= '1';
+							draw_number <= '1';
 						end if;
 				elsif(pixel_ux >= 54 and pixel_ux < 60) then
 						if(pixel_uy >= 24 and pixel_uy < 66) then
 							number_color <= "11111111";
-							drawNumber <= '1';
+							draw_number <= '1';
 						end if;
 				end if;
 				         
-			when 8 =>         
-			when 16 =>
-			when 32 =>
-			when 64 =>
-			when 128 =>
-			when 256 =>
-			when 512 =>
-			when 1024 =>
+			when "000000001000" =>
+				if(pixel_ux >= 30 and pixel_ux < 60) then
+						if((pixel_uy >= 24 and pixel_uy < 30) or
+							(pixel_uy >= 42 and pixel_uy < 48) or
+							(pixel_uy >= 60 and pixel_uy < 66)) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+				end if;
+			when "000000010000" =>
+			when "000000100000" =>
+			when "000001000000" =>
+			when "000010000000" =>
+			when "000100000000" =>
+			when "001000000000" =>
+			when "010000000000" =>
 			when others =>
 		end case;
 	end process;
