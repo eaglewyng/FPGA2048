@@ -9,8 +9,10 @@ entity Game is
 	port	(
 				clk : in std_logic;
 				sw0 : in std_logic;
-				btn : in std_logic_vector(3 downto 0)			
-	
+				btn : in std_logic_vector(3 downto 0);		
+				seg : out std_logic_vector(6 downto 0);
+				dp : out std_logic_vector;
+				an : out std_logic_vector(32 downto 0)
 			);
 
 end Game;
@@ -18,6 +20,7 @@ end Game;
 architecture Behavioral of Game is
 
 --GAME SIGNALS
+signal rst : std_logic;
 signal score : natural;
 type state is (start, playing, endGame);
 signal state_reg, state_next : state; 
@@ -30,6 +33,8 @@ signal isVictory : std_logic;
 signal game_over : std_logic;
 
 begin
+
+rst <= sw0;
 
 --state register
 process(clk)
@@ -78,10 +83,41 @@ begin
 		end case;
 end process;
 
---grid_color <= "11101011" when state_reg = start else
---				  "11110000" when state_reg = playing else
---				  "11101001" when (state_reg = endGame and isVictory = '0') else
---				  "11000100" when (state_reg = endGame and isVictory = '1');
+Grid1 : entity work.Grid
+port map( 
+			clk => clk,
+			rst => rst,
+			grid_color =>grid_color,
+			pixel_x => pixel_x,
+			pixel_y => pixel_y
+			);
+
+SevenSeg : entity work.seven_segment_display
+port map(
+			clk => clk,
+			data_in => "11111111", 
+			dp_in => "1111",
+			blank => open,
+			seg => seg,
+			dp => dp,
+			an => an
+		   );
+
+VGA : entity work.vga_timing
+port map (
+				clk => clk,
+				rst => rst,
+				HS => HS,
+				VS => VS,
+				pixel_x => pixel_x,
+				pixel_y => pixel_y,
+				last_column => open,
+				last_row => open,
+				blank => blank
+			 );
+
+
+
 
 end Behavioral;
 
