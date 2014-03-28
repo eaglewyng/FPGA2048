@@ -87,11 +87,18 @@ begin
 	process(value, pixel_x, pixel_y)
 	begin
 		case value is
-			when 0 =>
+			when 0 =>      
 			when 2 =>
-				
+				 if(pixel_ux >= 30 and pixel_ux < 60) then
+						if((pixel_uy >= 24 and pixel_uy < 30) or
+							(pixel_uy >= 42 and pixel_uy < 48) or
+							(pixel_uy >= 69 and pixel_uy < 66)) then
+							number_color <= "00000000";
+							drawNumber <= '1';
+						end if;
+				end if;
 			when 4 =>
-			when 8 =>
+			when 8 =>         
 			when 16 =>
 			when 32 =>
 			when 64 =>
