@@ -30,8 +30,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity Box is
 	generic(
 		XPOS : in NATURAL(9 downto 0);
-		YPOS : in NATURAL(9 downto 0);
-		SQUAREPIXELWIDTH : in NATURAL(9 downto 0)
+		YPOS : in NATURAL(9 downto 0)
 	);
 	port(
 		pixel_x : in STD_LOGIC_VECTOR(9 downto 0);
@@ -50,12 +49,19 @@ architecture game_arch of Box is
 	------------------Signal Declarations-----------------------------------------
 	--============================================================================
 	signal pixel_ux, pixel_uy : UNSIGNED(9 downto 0);
+	signal background_color : STD_LOGIC_VECTOR(7 downto 0);
+	signal number_color : STD_LOGIC_VECTOR(7 downto 0);
+	signal draw_number : STD_LOGIC;
 	
 	--============================================================================
 	------------------Constant Declarations---------------------------------------
 	--============================================================================
-	constant MAX_Y : UNSIGNED(9 downto 0) := XPOS + SQUAREPIXELWIDTH - 1;
-	constant MAX_Y : UNSIGNED(9 downto 0) := YPOS + SQIAREPIXELWIDTH - 1;
+	constant DIMENSIONS : UNSIGNED(9 downto 0) := 90;
+	constant MAX_X : UNSIGNED(9 downto 0) := XPOS + DIMENSIONS - 1;
+	constant MAX_Y : UNSIGNED(9 downto 0) := YPOS + DIMENSIONS - 1;
+	
+	
+	
 	
 	
 begin
@@ -63,7 +69,7 @@ begin
 	------------------Color Assignment Logic--------------------------------------
 	--============================================================================
 	with value select
-		rgb_color <=
+		background_color <=
 			"10001111" when "00000000000",
 			"11111110" when "00000000010",
 			"11111000" when "00000000100",
@@ -76,10 +82,33 @@ begin
 			"00011111" when "01000000000",
 			"00011011" when "10000000000",
 			"00000011" when others;
+			
+		
+	process(value, pixel_x, pixel_y)
+	begin
+		case value is
+			when 0 =>
+			when 2 =>
+				
+			when 4 =>
+			when 8 =>
+			when 16 =>
+			when 32 =>
+			when 64 =>
+			when 128 =>
+			when 256 =>
+			when 512 =>
+			when 1024 =>
+			when others =>
+		end case;
+	end process;
+	
 	
 	--============================================================================
 	------------------Display Logic-----------------------------------------------
 	--============================================================================
+	drawBox <= '1' when pixel_ux >= XPOS and pixel_ux <= MAX_X and pixel_uy >= YPOS and pixel_uy <= MAX_Y else
+					'0';
 	
 		
 	
