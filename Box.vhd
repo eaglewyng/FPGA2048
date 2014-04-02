@@ -172,7 +172,37 @@ begin
 						draw_number <= '1';
 					end if;
 				end if;
-				
+				if(posXPix >= 36 and posXPix < 42) then
+					if(posYPix >= 24 and posYPix < 66) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+				--for the "2"
+				if(posXPix >= 46 and posXPix < 76) then
+					if(posYPix >= 24 and posYPix < 30) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif(posYPix >= 42 and posYPix < 48) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif(posYPix >= 60 and posYPix < 68) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+				if(posXPix >= 46 and posXPix < 52) then
+					if(posYPix >= 30 and posYPix < 42) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+				if(posXPix >= 70 and posXPix < 76) then
+					if(posYPix >= 48 and posYPix < 59) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
 			when "000001000000" =>
 			when "000010000000" =>
 			when "000100000000" =>
