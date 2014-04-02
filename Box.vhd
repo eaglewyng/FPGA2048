@@ -19,7 +19,6 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
 use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
@@ -43,7 +42,7 @@ entity Box is
 	);
 end Box;
 
-	
+
 architecture game_arch of Box is
 	--============================================================================
 	------------------Signal Declarations-----------------------------------------
@@ -53,18 +52,18 @@ architecture game_arch of Box is
 	signal background_color : STD_LOGIC_VECTOR(7 downto 0);
 	signal number_color : STD_LOGIC_VECTOR(7 downto 0);
 	signal draw_number : STD_LOGIC;
-	
+
 	--============================================================================
 	------------------Constant Declarations---------------------------------------
 	--============================================================================
 	constant DIMENSIONS : UNSIGNED(9 downto 0) := TO_UNSIGNED(90, 10);
 	constant MAX_X : UNSIGNED(9 downto 0) := XPOS + DIMENSIONS - 1;
 	constant MAX_Y : UNSIGNED(9 downto 0) := YPOS + DIMENSIONS - 1;
-	
-	
-	
-	
-	
+
+
+
+
+
 begin
 	--============================================================================
 	------------------Color Assignment Logic--------------------------------------
@@ -83,9 +82,13 @@ begin
 			"00011111" when "001000000000",
 			"00011011" when "010000000000",
 			"00000011" when others;
-			
-		
-	process(value, pixel_x, pixel_y)
+
+
+rgb_color <= number_color when draw_number = '1' else
+				 background_color when (to_integer(pixel_ux) < XPOS + 90) and (to_integer(pixel_uy) < YPOS + 90) else
+				 "00000000";
+
+	process(value, pixel_x, pixel_y, posXPix, posYPix)
 	begin
 		draw_number <= '0';
 		number_color <= "00000000";
@@ -119,8 +122,8 @@ begin
 							draw_number <= '1';
 						end if;
 				end if;
-				
-				         
+
+
 			when "000000001000" =>
 				if(posXPix >= 30 and posXPix < 60) then
 						if((posYPix >= 24 and posYPix < 30) or
@@ -147,17 +150,17 @@ begin
 					number_color <= "11111111";
 					draw_number <= '1';
 				end if;
-				
+
 				if(posXPix >= 14 and posXPix < 32 and posYPix >= 60 and posYPix < 66) then
 					number_color <= "11111111";
 					draw_number <= '1';
 				end if;
-				
+
 				if(posXPix >= 14 and posXPix < 44 and posYPix >= 24 and posYPix < 30) then
 					number_color <= "11111111";
 					draw_number <= '1';
 				end if;
-				
+
 			when "000000100000" =>
 				if(posXPix >= 18 and posXPix < 32 and posYPix >= 42 and posYPix < 48) then
 					number_color <= "11111111";
@@ -211,16 +214,17 @@ begin
 			when others =>
 		end case;
 	end process;
-	
-	
+
+
+
 	--============================================================================
 	------------------Display Logic-----------------------------------------------
 	--============================================================================
 	drawBox <= '1' when pixel_ux >= XPOS and pixel_ux <= MAX_X and pixel_uy >= YPOS and pixel_uy <= MAX_Y else
 					'0';
-	
-		
-	
+
+
+
 	--============================================================================
 	------------------Other Signal Assignments------------------------------------
 	--============================================================================
@@ -228,6 +232,5 @@ begin
 	pixel_uy <= UNSIGNED(pixel_y);
 	posXPix <= pixel_ux - XPOS;
 	posYPix <= pixel_uy - YPOS;
-	
-end game_arch;
 
+end game_arch;

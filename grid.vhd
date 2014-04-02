@@ -14,30 +14,71 @@ entity Grid is
 				pixel_x : in std_logic_vector(9 downto 0);
 				pixel_y : in std_logic_vector(9 downto 0);
 				btn : in std_logic_vector(3 downto 0);
-				draw_grid : out std_logic
+				draw_grid : out std_logic;
+				rgbOut : out std_logic_vector(7 downto 0)
 
 	);
 end Grid;
 
 architecture Behavioral of Grid is
-
+signal gridOn : std_logic;
 
 signal rgb1,rgb2,rgb3,rgb4,rgb5,rgb6,rgb7,rgb8,rgb9,rgb10,rgb11,
 rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
 signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
 drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
---signal XPOS1,XPOS2,XPOS3,XPOS4,XPOS5,XPOS6,XPOS7,XPOS8,XPOS9,XPOS10,XPOS11,XPOS12,XPOS13,XPOS14,XPOS15
 
--- 4 bit array to hold all 16 values.
+-- 16 wires of 12 bits each
 type value is array (15 downto 0) of unsigned(11 downto 0);
 signal boxValues, boxValues_next: value; 
 
 
 begin
+---------------------------------------------------------------
+-- 			Draw Grid Logic
+---------------------------------------------------------------
+gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 48) or
+							  (unsigned(pixel_y) > 138 and unsigned(pixel_y) <= 144) or
+							  (unsigned(pixel_y) > 236 and unsigned(pixel_y) <= 244) or
+							  (unsigned(pixel_y) > 334 and unsigned(pixel_y) <= 342) or
+							  (unsigned(pixel_y) > 432 and unsigned(pixel_y) <= 440) or
+							  (unsigned(pixel_x) > 120 and unsigned(pixel_x) <= 128) or
+							  (unsigned(pixel_x) > 218 and unsigned(pixel_x) <= 226) or
+							  (unsigned(pixel_x) > 316 and unsigned(pixel_x) <= 324) or
+							  (unsigned(pixel_x) > 414 and unsigned(pixel_x) <= 422) or
+							  (unsigned(pixel_x) > 512 and unsigned(pixel_x) <= 520)) else
+				'0';
 
-	--============================================================================
-	------------------Entity Instantiations---------------------------------------
-	--============================================================================
+
+draw_grid <= gridOn;
+---------------------------------------------------------------
+--				Grid/Box Color Logic
+---------------------------------------------------------------
+rgbOut <= grid_color when gridOn = '1' else
+			 rgb1 when drawbox1 = '1' else
+			 rgb2 when drawbox2 = '1' else
+			 rgb3 when drawbox3 = '1' else
+			 rgb4 when drawbox4 = '1' else
+			 rgb5 when drawbox5 = '1' else
+			 rgb6 when drawbox6 = '1' else
+			 rgb7 when drawbox7 = '1' else
+			 rgb8 when drawbox8 = '1' else
+			 rgb9 when drawbox9 = '1' else
+			 rgb10 when drawbox10 = '1' else
+			 rgb11 when drawbox11 = '1' else
+			 rgb12 when drawbox12 = '1' else
+			 rgb13 when drawbox13 = '1' else
+			 rgb14 when drawbox14 = '1' else
+			 rgb15 when drawbox15 = '1' else
+			 rgb16 when drawbox16 = '1' else
+			 "00000000";
+
+
+--============================================================================
+------------------Entity Instantiations---------------------------------------
+--============================================================================
+
+
 	Box1 : entity work.Box 
 
 	generic map(
