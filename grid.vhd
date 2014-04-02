@@ -29,7 +29,7 @@ drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logi
 --signal XPOS1,XPOS2,XPOS3,XPOS4,XPOS5,XPOS6,XPOS7,XPOS8,XPOS9,XPOS10,XPOS11,XPOS12,XPOS13,XPOS14,XPOS15
 
 -- 4 bit array to hold all 16 values.
-type value is array (3 downto 0) of unsigned(11 downto 0);
+type value is array (15 downto 0) of unsigned(11 downto 0);
 signal boxValues: value; 
 
 
