@@ -27,9 +27,8 @@ drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logi
 --signal XPOS1,XPOS2,XPOS3,XPOS4,XPOS5,XPOS6,XPOS7,XPOS8,XPOS9,XPOS10,XPOS11,XPOS12,XPOS13,XPOS14,XPOS15
 
 -- 4 bit array to hold all 16 values.
-type value is array (3 downto 0,11 downto 0) of unsigned;
-signal boxValue1,boxValue2,boxValue3,boxValue4,boxValue5,boxValue6,boxValue7,boxValue8,boxValue9,
-boxValue10,boxValue11,boxValue12,boxValue13,boxValue14,boxValue15,boxValue16: value; 
+type value is array (3 downto 0) of unsigned(11 downto 0);
+signal boxValues: value; 
 
 
 begin
@@ -44,7 +43,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue1,
+				value => boxValues(0),
 				rgb_color => rgb1,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -60,7 +59,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue2,
+				value => boxValues(1),
 				rgb_color => rgb2,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -76,7 +75,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue3,
+				value => boxValues(2),
 				rgb_color => rgb3,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -92,7 +91,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue4,
+				value => boxValues(3),
 				rgb_color => rgb4,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -108,7 +107,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue5,
+				value => boxValues(4),
 				rgb_color => rgb5,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -124,7 +123,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue6,
+				value => boxValues(5),
 				rgb_color => rgb6,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -140,7 +139,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue7,
+				value => boxValues(6),
 				rgb_color => rgb7,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -156,7 +155,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue8,
+				value => boxValues(7),
 				rgb_color => rgb8,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -172,7 +171,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue9,
+				value => boxValues(8),
 				rgb_color => rgb9,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -188,7 +187,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue10,
+				value => boxValues(9),
 				rgb_color => rgb10,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -204,7 +203,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue11,
+				value => boxValues(10),
 				rgb_color => rgb11,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -220,7 +219,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue12,
+				value => boxValues(11),
 				rgb_color => rgb12,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -237,7 +236,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue13,
+				value => boxValues(12),
 				rgb_color => rgb13,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -254,7 +253,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue14,
+				value => boxValues(13),
 				rgb_color => rgb14,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -271,7 +270,7 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue15,
+				value => boxValues(14),
 				rgb_color => rgb15,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
@@ -287,12 +286,14 @@ generic map(
 port map(
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				value => boxValue16,
+				value => boxValues(15),
 				rgb_color => rgb16,
 				--this signal is so we can tell whether we should actually draw the color
 				--being output by the box or not!
 				drawBox => drawBox16
 );
+
+	
 
 
 

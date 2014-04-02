@@ -35,7 +35,7 @@ entity Box is
 	port(
 		pixel_x : in STD_LOGIC_VECTOR(9 downto 0);
 		pixel_y : in STD_LOGIC_VECTOR(9 downto 0);
-		value : in UNSIGNED(10 downto 0);
+		value : in UNSIGNED(11 downto 0);
 		rgb_color : out STD_LOGIC_VECTOR(7 downto 0);
 		--this signal is so we can tell whether we should actually draw the color
 		--being output by the box or not!
@@ -71,17 +71,17 @@ begin
 	--============================================================================
 	with value select
 		background_color <=
-			"10001111" when "00000000000",
-			"11111110" when "00000000010",
-			"11111000" when "00000000100",
-			"11110000" when "00000001000",
-			"11100000" when "00000010000",
-			"11001100" when "00000100000",
-			"11011000" when "00001000000",
-			"10011000" when "00010000000",
-			"00011100" when "00100000000", 
-			"00011111" when "01000000000",
-			"00011011" when "10000000000",
+			"10001111" when "000000000000",
+			"11111110" when "000000000010",
+			"11111000" when "000000000100",
+			"11110000" when "000000001000",
+			"11100000" when "000000010000",
+			"11001100" when "000000100000",
+			"11011000" when "000001000000",
+			"10011000" when "000010000000",
+			"00011100" when "000100000000", 
+			"00011111" when "001000000000",
+			"00011011" when "010000000000",
 			"00000011" when others;
 			
 		
@@ -137,7 +137,7 @@ begin
 							draw_number <= '1';
 						elsif(posYPix <= 40 and posYPix < 46) then
 							number_color <= "11111111";
-							raw_number <= '1';
+							draw_number <= '1';
 						elsif(posYPix >= 24 and posYPix < 30) then
 							number_color <= "11111111";
 							draw_number <= '1';
