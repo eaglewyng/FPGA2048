@@ -12,7 +12,7 @@ entity Grid is
 				rst : in std_logic;
 				grid_color : in std_logic_vector(7 downto 0);
 				pixel_x : in std_logic_vector(9 downto 0);
-				pixel_y : in std_logic_vector(10 downto 0);
+				pixel_y : in std_logic_vector(9 downto 0);
 				btn : in std_logic_vector(3 downto 0);
 				draw_grid : out std_logic
 
