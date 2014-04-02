@@ -33,6 +33,12 @@ signal isVictory : std_logic;
 signal game_over : std_logic;
 signal draw_grid : std_logic;
 
+--debouncing signals
+	signal btn_debounced: STD_LOGIC_VECTOR(3 downto 0);
+	signal btn_debounced_next: STD_LOGIC_VECTOR(3 downto 0);
+	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal deb_counter_set : STD_LOGIC;                    --sync reset to zero
+   signal deb_counter_out : STD_LOGIC_VECTOR(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
 begin
 
 rst <= sw0;
@@ -118,6 +124,10 @@ port map (
 				last_row => open,
 				blank => blank
 			 );
+			 
+	--============================================================================
+	------------------Debouncer Circuit-------------------------------------------
+	--============================================================================
 
 
 
