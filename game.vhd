@@ -31,6 +31,7 @@ signal grid_color : std_logic_vector(7 downto 0);
 --outputs from GRID
 signal isVictory : std_logic;
 signal game_over : std_logic;
+signal draw_grid : std_logic;
 
 begin
 
@@ -89,7 +90,9 @@ port map(
 			rst => rst,
 			grid_color =>grid_color,
 			pixel_x => pixel_x,
-			pixel_y => pixel_y
+			pixel_y => pixel_y,
+			btn => btn,
+			draw_grid => draw_grid
 			);
 
 SevenSeg : entity work.seven_segment_display
@@ -118,6 +121,4 @@ port map (
 
 
 
-
 end Behavioral;
-
