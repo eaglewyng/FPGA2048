@@ -243,7 +243,79 @@ rgb_color <= number_color when draw_number = '1' else
 							end if;
 					end if;
 				end if;
+			--128
 			when "000010000000" =>
+			--1
+			if (posXPix >= 16 and posXPix < 25) then
+				if (posYPix >= 24 and posYPix < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			if (posXPix >= 9 and posXPix < 25) then
+				if (posYPix >= 57 and posYPix < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			if (posXPix >= 9 and posXPix < 32) then
+				if (posYPix >= 24 and posYPix < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			--2
+			if (posXPix >= 34 and posXPix < 56) then
+				if (posYPix >= 24 and posYpix < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (posYPix >= 33 and posYPix < 41) then
+					if (posXPix >= 34 and posXPix < 43) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (posYPix >= 41 and posYPix < 49) then 
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (posYPix >= 49 and posYPix < 57) then
+					if (posXPix >= 47 and posXPix < 56) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (posYPix >= 57 and posYPix < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			--8
+			if (posXPix >= 58 and posXPix < 81) then
+				if (posYPix >= 24 and posYPix < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (posYPix >= 33 and posYPix < 42) then
+					if (posXPix >= 58 and posXPix < 65) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (posXPix >= 74 and posXPix < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (posYPix >= 42 and posYPix < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (posYPix >= 48 and posYPix < 57) then
+					if (posXPix >= 58 and posXPix < 65) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (posXPix >= 74 and posXPix < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (posYPix >= 57 and posYPix < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
 			when "000100000000" =>
 			when "001000000000" =>
 			when "010000000000" =>
