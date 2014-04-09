@@ -41,11 +41,6 @@ architecture Behavioral of Grid is
 	signal INrandom_num : std_logic_vector(3 downto 0);
 
 begin
----------------------------------------------------------------
---				Random Number Generator
----------------------------------------------------------------
---discontinued for now
-
 
 ---------------------------------------------------------------
 -- 			Draw Grid Logic
@@ -378,44 +373,48 @@ rgbOut <= grid_color when gridOn = '1' else
 	------------------------------------------------------------------------------
 	--			Random Box Generator
 	------------------------------------------------------------------------------
-	process(clk, btn_posedge)
+	process(boxValues, random_num, btn_posedge)
 	 begin
-		if boxValues(random_num) = 0 then
-				boxValues(random_num) <= 2;
-		elsif (boxValues(random_num + 1) = 0) then
-				boxValues(random_num + 1) <= 2;
-		elsif (boxValues(random_num + 2) = 0) then
-				boxValues(random_num + 2) <= 2;
-		elsif (boxValues(random_num + 3) = 0) then
-				boxValues(random_num + 3) <= 2;
-		elsif (boxValues(random_num + 4) = 0) then
-				boxValues(random_num + 4) <= 2;
-		elsif (boxValues(random_num + 5) = 0) then
-				boxValues(random_num + 5) <= 2;
-		elsif (boxValues(random_num + 6) = 0) then
-				boxValues(random_num + 6) <= 2;
-		elsif (boxValues(random_num + 7) = 0) then
-				boxValues(random_num + 7) <= 2;
-		elsif (boxValues(random_num + 8) = 0) then
-				boxValues(random_num + 8) <= 2;
-		elsif (boxValues(random_num + 9) = 0) then
-				boxValues(random_num + 9) <= 2;
-		elsif (boxValues(random_num + 10) = 0) then
-				boxValues(random_num + 10) <= 2;
-		elsif (boxValues(random_num + 11) = 0) then
-				boxValues(random_num + 11) <= 2;
-		elsif (boxValues(random_num + 12) = 0) then
-				boxValues(random_num + 12) <= 2;
-		elsif (boxValues(random_num + 13) = 0) then
-				boxValues(random_num + 13) <= 2;
-		elsif (boxValues(random_num + 14) = 0) then
-				boxValues(random_num + 14) <= 2;
-		elsif (boxValues(random_num + 15) = 0) then
-				boxValues(random_num + 15) <= 2;
-		elsif (boxValues(random_num + 16) = 0) then
-				boxValues(random_num + 16) <= 2;
-		else
-			gameOver <= '1';
+	 boxValues_next <= boxValues;
+	 gameOver <= '0';
+		if btn_posedge = '1' then
+			if boxValues(to_integer(random_num)) = 0 then
+					boxValues_next(to_integer(random_num)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 1)) = 0) then
+					boxValues_next(to_integer(random_num + 1)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 2)) = 0) then
+					boxValues_next(to_integer(random_num + 2)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 3)) = 0) then
+					boxValues_next(to_integer(random_num + 3)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 4)) = 0) then
+					boxValues_next(to_integer(random_num + 4)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 5)) = 0) then
+					boxValues_next(to_integer(random_num + 5)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 6)) = 0) then
+					boxValues_next(to_integer(random_num + 6)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 7)) = 0) then
+					boxValues_next(to_integer(random_num + 7)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 8)) = 0) then
+					boxValues_next(to_integer(random_num + 8)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 9)) = 0) then
+					boxValues_next(to_integer(random_num + 9)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 10)) = 0) then
+					boxValues_next(to_integer(random_num + 10)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 11)) = 0) then
+					boxValues_next(to_integer(random_num + 11)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 12)) = 0) then
+					boxValues_next(to_integer(random_num + 12)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 13)) = 0) then
+					boxValues_next(to_integer(random_num + 13)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 14)) = 0) then
+					boxValues_next(to_integer(random_num + 14)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 15)) = 0) then
+					boxValues_next(to_integer(random_num + 15)) <= to_unsigned(2,12);
+			elsif (boxValues(to_integer(random_num + 16)) = 0) then
+					boxValues_next(to_integer(random_num + 16)) <= to_unsigned(2,12);
+			else
+				gameOver <= '1';
+			end if;
 		end if;
 	end process;
 	
