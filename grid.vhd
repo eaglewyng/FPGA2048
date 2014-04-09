@@ -377,7 +377,8 @@ rgbOut <= grid_color when gridOn = '1' else
 	 begin
 	 boxValues_next <= boxValues;
 	 gameOver <= '0';
-		if btn_posedge = '1' then
+		if btn_posedge(0) = '1' or btn_posedge(1) = '1' or btn_posedge(2) = '1' 
+			or btn_posedge(3) = '1' then
 			if boxValues(to_integer(random_num)) = 0 then
 					boxValues_next(to_integer(random_num)) <= to_unsigned(2,12);
 			elsif (boxValues(to_integer(random_num + 1)) = 0) then
