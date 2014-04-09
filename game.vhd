@@ -99,6 +99,8 @@ begin
 	
 	vs_next <= vs_fromVGA;
 	hs_next <= hs_fromVGA;
+	VS <= vs_reg;
+	HS <= hs_reg;
 
 	--FSM
 	process(state_reg, sw0, game_over, isVictory)
