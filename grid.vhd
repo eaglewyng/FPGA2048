@@ -32,6 +32,9 @@ architecture Behavioral of Grid is
 	-- 16 wires of 12 bits each
 	type value is array (15 downto 0) of unsigned(11 downto 0);
 	signal boxValues, boxValues_next: value; 
+	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
+	signal btn_posedge : STD_LOGIC_VECTOR(3 downto 0);
 
 	--random number
 	signal random_num : unsigned(3 downto 0);
@@ -364,8 +367,10 @@ rgbOut <= grid_color when gridOn = '1' else
 	begin
 		if(rst = '1') then
 			boxValues <= (others => (others => '0'));
+			btn_edgedet <= (others => '0');
 		elsif(clk'event and clk = '1') then
 			boxValues <= boxValues_next;
+			btn_edgedet <= btn_edgedet_next;
 		end if;
 	end process;
 	
