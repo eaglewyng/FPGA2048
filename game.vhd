@@ -50,9 +50,8 @@ signal pixel_y : std_logic_vector(9 downto 0);
 	constant counter_size : NATURAL :=  500000;
 	signal btn_debounced: STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_debounced_next: STD_LOGIC_VECTOR(3 downto 0);
-	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);
-	signal deb_counter_set : STD_LOGIC;                    --sync reset to zero
-   signal deb_counter_out : STD_LOGIC_VECTOR(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
+	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);                 --sync reset to zero
+   signal deb_counter_out, deb_counter_next : UNSIGNED(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
 
 
 
@@ -125,7 +124,7 @@ begin
 				grid_color =>grid_color,
 				pixel_x => pixel_x,
 				pixel_y => pixel_y,
-				btn => btn,
+				btn => btn_debounced,
 				draw_grid => draw_grid,
 				rgbOut => rgbFromGrid
 				);
@@ -157,7 +156,22 @@ begin
 		--============================================================================
 		------------------Debouncer Circuit-------------------------------------------
 		--============================================================================
-
+	process(clk, sw0)
+	begin
+		if(sw0 = '1') then
+			btn_intdebounced <= (others => '0');
+			btn_debounced <= (others => '0');
+			deb_counter_out <= (others => '0');
+		elsif(clk'event and clk = '1') then
+			btn_intdebounced <= btn_intdebounced_next;
+			btn_debounced <= btn_debounced_next;
+			deb_counter_out <= deb_counter_next;
+		end if;
+	end process;
+	
+	
+	deb_counter_next <= (others => '0') when btn_debounced /= btn_intdebounced else
+								deb_counter_out + 1;
 
 
 	end Behavioral;
