@@ -31,6 +31,9 @@ architecture Behavioral of Grid is
 	-- 16 wires of 12 bits each
 	type value is array (15 downto 0) of unsigned(11 downto 0);
 	signal boxValues, boxValues_next: value; 
+	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
+	signal btn_posedge : STD_LOGIC_VECTOR(3 downto 0);
 
 
 begin
@@ -346,13 +349,22 @@ rgbOut <= grid_color when gridOn = '1' else
 	begin
 		if(rst = '1') then
 			boxValues <= (others => (others => '0'));
+			btn_edgedet <= (others => '0');
 		elsif(clk'event and clk = '1') then
 			boxValues <= boxValues_next;
+			btn_edgedet <= btn_edgedet_next;
 		end if;
 	end process;
+
+	--this is a positive edge detector, so we don't repeat moves unnecessarily
+	btn_posedge0 <= (btn(0) xor btn_edgedet(0)) when (btn(0) = '0') else '0';
+	btn_posedge1 <= (btn(1) xor btn_edgedet(1)) when (btn(1) = '0')  else '0';
+	btn_posedge2 <= (btn(2) xor btn_edgedet(2)) when (btn(2) = '0') else '0';
+	btn_posedge3 <= (btn(3) xor btn_edgedet(3)) when (btn(3) = '0') else '0';
+	btn_edgedet_next <= btn;
+	btn_posedge <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 	
-	
-	process(btn, boxValues)
+	process(btn_posedge, boxValues)
 	begin
 		boxValues_next <= boxValues;
 		case btn is
