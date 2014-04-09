@@ -59,6 +59,11 @@ signal pixel_y : std_logic_vector(9 downto 0);
 		end loop;
 		return m;
 	end log2c;
+	
+	--HS and VS registers
+	signal hs_reg, hs_next, vs_reg, vs_next : STD_LOGIC;
+	signal hs_fromVGA, vs_fromVGA : STD_LOGIC;
+	
 	--============================================================================
 	------------------Constant values---------------------------------------------
 	--============================================================================
@@ -75,6 +80,10 @@ signal pixel_y : std_logic_vector(9 downto 0);
 
 
 begin
+	--============================================================================
+	------------------Registers---------------------------------------------------
+	--============================================================================
+	
 	rst <= sw0;
 	--state register
 	process(clk, sw0)
@@ -83,8 +92,13 @@ begin
 			state_reg <= start;
 		elsif rising_edge(clk) then
 			state_reg <= state_next;
+			hs_reg <= hs_next;
+			vs_reg <= vs_next;
 		end if;
 	end process;
+	
+	vs_next <= vs_fromVGA;
+	hs_next <= hs_fromVGA;
 
 	--FSM
 	process(state_reg, sw0, game_over, isVictory)
@@ -166,8 +180,8 @@ begin
 	port map (
 					clk => clk,
 					rst => rst,
-					HS => HS,
-					VS => VS,
+					HS => hs_fromVGA,
+					VS => vs_fromVGA,
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
 					last_column => open,
