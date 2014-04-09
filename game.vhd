@@ -68,6 +68,7 @@ signal pixel_y : std_logic_vector(9 downto 0);
 	constant DELAY_COUNTER_BITS : NATURAL := log2c(DEBOUNCE_DELAY_MAX_VAL);	
 	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);                 --sync reset to zero
    signal deb_counter_out, deb_counter_next : UNSIGNED(DELAY_COUNTER_BITS-1 DOWNTO 0) := (OTHERS => '0'); --counter output
+	signal btn_debounced, btn_debounced_next : STD_LOGIC_VECTOR(3 downto 0);
 	
 	
 
@@ -193,6 +194,9 @@ begin
 	
 	deb_counter_next <= (others => '0') when btn_debounced /= btn_intdebounced else
 								deb_counter_out + 1;
+	
+	btn_intdebounced_next <= btn;
+	btn_debounced_next <= btn_intdebounced;
 
 
 	end Behavioral;
