@@ -21,16 +21,16 @@ entity Grid is
 end Grid;
 
 architecture Behavioral of Grid is
-signal gridOn : std_logic;
+	signal gridOn : std_logic;
 
-signal rgb1,rgb2,rgb3,rgb4,rgb5,rgb6,rgb7,rgb8,rgb9,rgb10,rgb11,
-rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
-signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
-drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
+	signal rgb1,rgb2,rgb3,rgb4,rgb5,rgb6,rgb7,rgb8,rgb9,rgb10,rgb11,
+	rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
+	signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
+	drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
 
--- 16 wires of 12 bits each
-type value is array (15 downto 0) of unsigned(11 downto 0);
-signal boxValues, boxValues_next: value; 
+	-- 16 wires of 12 bits each
+	type value is array (15 downto 0) of unsigned(11 downto 0);
+	signal boxValues, boxValues_next: value; 
 
 
 begin
