@@ -47,31 +47,11 @@ signal pixel_x : std_logic_vector(9 downto 0);
 signal pixel_y : std_logic_vector(9 downto 0);
 
 --debouncing signals
-	--function--
-	function log2c(n: integer) return integer is
-		variable m, p: integer;
-	begin
-		m := 0;
-		p := 1;
-		while p < n loop
-			m := m + 1;
-			p := p * 2;
-		end loop;
-		return m;
-	end log2c;
-	--============================================================================
-	------------------Constant values---------------------------------------------
-	--============================================================================
-	constant CLK_RATE : NATURAL := 50_000_000;
-	constant DEBOUNCE_RATE : NATURAL := 100;
-	constant DEBOUNCE_DELAY_MAX_VAL : NATURAL := CLK_RATE / DEBOUNCE_RATE - 1;
-	constant DELAY_COUNTER_BITS : NATURAL := log2c(DEBOUNCE_DELAY_MAX_VAL);	
+	constant counter_size : NATURAL :=  500000;
 	signal btn_debounced: STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_debounced_next: STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);                 --sync reset to zero
-   signal deb_counter_out, deb_counter_next : UNSIGNED(DELAY_COUNTER_BITS-1 DOWNTO 0) := (OTHERS => '0'); --counter output
-	
-	
+   signal deb_counter_out, deb_counter_next : UNSIGNED(counter_size DOWNTO 0) := (OTHERS => '0'); --counter output
 
 
 
@@ -136,7 +116,9 @@ begin
 	rgbOut <= rgbFromGrid when draw_grid = '1' and blank = '0' else
 				 "11111111";
 
-
+	-------------------------------------------------------------
+	--			Entity Instantiations
+	-------------------------------------------------------------
 	Grid1 : entity work.Grid
 	port map( 
 				clk => clk,
@@ -146,7 +128,8 @@ begin
 				pixel_y => pixel_y,
 				btn => btn_debounced,
 				draw_grid => draw_grid,
-				rgbOut => rgbFromGrid
+				rgbOut => rgbFromGrid,
+				gameOver => game_over
 				);
 
 	SevenSeg : entity work.seven_segment_display
