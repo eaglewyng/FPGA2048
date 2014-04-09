@@ -93,7 +93,8 @@ rgb_color <= number_color when draw_number = '1' else
 		draw_number <= '0';
 		number_color <= "00000000";
 		case value is
-			when "000000000000" =>      
+			when "000000000000" =>
+			--2
 			when "000000000010" =>
 				 if(posXPix >= 30 and posXPix < 60) then
 						if((posYPix >= 24 and posYPix < 30) or
@@ -103,6 +104,7 @@ rgb_color <= number_color when draw_number = '1' else
 							draw_number <= '1';
 						end if;
 				end if;
+			--4
 			when "000000000100" =>
 				if(posXPix >= 36 and posXPix < 53) then
 						if(posYPix >=42 and posYPix < 48) then
@@ -123,7 +125,7 @@ rgb_color <= number_color when draw_number = '1' else
 						end if;
 				end if;
 
-
+			--8
 			when "000000001000" =>
 				if(posXPix >= 30 and posXPix < 60) then
 						if((posYPix >= 24 and posYPix < 30) or
@@ -133,6 +135,7 @@ rgb_color <= number_color when draw_number = '1' else
 							draw_number <= '1';
 						end if;
 				end if;
+			--16
 			when "000000010000" =>
 				if(posXPix >= 46 and posXPix < 76) then
 						if(posYPix >= 60 and posYPix < 64) then
@@ -160,7 +163,7 @@ rgb_color <= number_color when draw_number = '1' else
 					number_color <= "11111111";
 					draw_number <= '1';
 				end if;
-
+			--32
 			when "000000100000" =>
 				if(posXPix >= 18 and posXPix < 32 and posYPix >= 42 and posYPix < 48) then
 					number_color <= "11111111";
@@ -206,7 +209,40 @@ rgb_color <= number_color when draw_number = '1' else
 						draw_number <= '1';
 					end if;
 				end if;
+			--64
 			when "000001000000" =>
+				--6
+				if(posXPix >= 14 and posXPix < 44) then
+						if(posYPix >= 60 and posYPix < 64) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif(posYPix <= 40 and posYPix < 46) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif(posYPix >= 24 and posYPix < 30) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					--4
+					if(posXPix >= 46 and posXPix < 76) then
+						if(posYPix >=42 and posYPix < 48) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					end if;
+					if(posXPix >= 52 and posXPix < 68) then
+							if(posYPix >= 42 and posYPix < 66) then
+								number_color <= "11111111";
+								draw_number <= '1';
+							end if;
+					end if;
+					if(posXPix >= 68 and posXPix < 76) then
+							if(posYPix >= 24 and posYPix < 66) then
+								number_color <= "11111111";
+								draw_number <= '1';
+							end if;
+					end if;
+				end if;
 			when "000010000000" =>
 			when "000100000000" =>
 			when "001000000000" =>
