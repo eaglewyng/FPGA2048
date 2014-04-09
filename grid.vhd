@@ -4,7 +4,7 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
-
+use IEEE.MATH_REAL.ALL;
 
 entity Grid is
 	port (
@@ -15,7 +15,8 @@ entity Grid is
 				pixel_y : in std_logic_vector(9 downto 0);
 				btn : in std_logic_vector(3 downto 0);
 				draw_grid : out std_logic;
-				rgbOut : out std_logic_vector(7 downto 0)
+				rgbOut : out std_logic_vector(7 downto 0);
+				gameOver : out std_logic
 
 	);
 end Grid;
@@ -31,12 +32,18 @@ architecture Behavioral of Grid is
 	-- 16 wires of 12 bits each
 	type value is array (15 downto 0) of unsigned(11 downto 0);
 	signal boxValues, boxValues_next: value; 
-	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
-	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
-	signal btn_posedge : STD_LOGIC_VECTOR(3 downto 0);
 
+	--random number
+	signal random_num : unsigned(3 downto 0);
+	signal INrandom_num : std_logic_vector(3 downto 0);
 
 begin
+---------------------------------------------------------------
+--				Random Number Generator
+---------------------------------------------------------------
+--discontinued for now
+
+
 ---------------------------------------------------------------
 -- 			Draw Grid Logic
 ---------------------------------------------------------------
@@ -80,7 +87,15 @@ rgbOut <= grid_color when gridOn = '1' else
 --============================================================================
 ------------------Entity Instantiations---------------------------------------
 --============================================================================
-
+	Random1 : entity work.randomGenerator
+	
+	generic map(
+						width => 4
+					)
+	port map (
+					clk => clk,
+					random_num => INrandom_num
+				);
 
 	Box1 : entity work.Box 
 
@@ -349,25 +364,60 @@ rgbOut <= grid_color when gridOn = '1' else
 	begin
 		if(rst = '1') then
 			boxValues <= (others => (others => '0'));
-			btn_edgedet <= (others => '0');
 		elsif(clk'event and clk = '1') then
 			boxValues <= boxValues_next;
-			btn_edgedet <= btn_edgedet_next;
 		end if;
 	end process;
-
-	--this is a positive edge detector, so we don't repeat moves unnecessarily
-	btn_posedge0 <= (btn(0) xor btn_edgedet(0)) when (btn(0) = '0') else '0';
-	btn_posedge1 <= (btn(1) xor btn_edgedet(1)) when (btn(1) = '0')  else '0';
-	btn_posedge2 <= (btn(2) xor btn_edgedet(2)) when (btn(2) = '0') else '0';
-	btn_posedge3 <= (btn(3) xor btn_edgedet(3)) when (btn(3) = '0') else '0';
-	btn_edgedet_next <= btn;
-	btn_posedge <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
+	
+	
+	------------------------------------------------------------------------------
+	--			Random Box Generator
+	------------------------------------------------------------------------------
+	process(clk, btn_posedge)
+	 begin
+		if boxValues(random_num) = 0 then
+				boxValues(random_num) <= 2;
+		elsif (boxValues(random_num + 1) = 0) then
+				boxValues(random_num + 1) <= 2;
+		elsif (boxValues(random_num + 2) = 0) then
+				boxValues(random_num + 2) <= 2;
+		elsif (boxValues(random_num + 3) = 0) then
+				boxValues(random_num + 3) <= 2;
+		elsif (boxValues(random_num + 4) = 0) then
+				boxValues(random_num + 4) <= 2;
+		elsif (boxValues(random_num + 5) = 0) then
+				boxValues(random_num + 5) <= 2;
+		elsif (boxValues(random_num + 6) = 0) then
+				boxValues(random_num + 6) <= 2;
+		elsif (boxValues(random_num + 7) = 0) then
+				boxValues(random_num + 7) <= 2;
+		elsif (boxValues(random_num + 8) = 0) then
+				boxValues(random_num + 8) <= 2;
+		elsif (boxValues(random_num + 9) = 0) then
+				boxValues(random_num + 9) <= 2;
+		elsif (boxValues(random_num + 10) = 0) then
+				boxValues(random_num + 10) <= 2;
+		elsif (boxValues(random_num + 11) = 0) then
+				boxValues(random_num + 11) <= 2;
+		elsif (boxValues(random_num + 12) = 0) then
+				boxValues(random_num + 12) <= 2;
+		elsif (boxValues(random_num + 13) = 0) then
+				boxValues(random_num + 13) <= 2;
+		elsif (boxValues(random_num + 14) = 0) then
+				boxValues(random_num + 14) <= 2;
+		elsif (boxValues(random_num + 15) = 0) then
+				boxValues(random_num + 15) <= 2;
+		elsif (boxValues(random_num + 16) = 0) then
+				boxValues(random_num + 16) <= 2;
+		else
+			gameOver <= '1';
+		end if;
+	end process;
 	
 	process(btn_posedge, boxValues)
 	begin
 		boxValues_next <= boxValues;
-		case btn is
+		case btn_posedge is
 			--right button
 			when "0001" =>
 				--first row
