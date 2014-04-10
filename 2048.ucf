@@ -34,14 +34,14 @@ NET "an<2>" LOC = "C18"; # Bank = 1, Pin name = IO_L24P_1/LDC1, Type = DUAL, Sch
 NET "an<3>" LOC = "F15"; # Bank = 1, Pin name = IO_L21P_1, Type = I/O, Sch name = AN3
  
 ## VGA Connector 
-NET "vgaRed<1>"   LOC = "R9"; # Bank = 2, Pin name = IO/D5, Type = DUAL, Sch name = RED0
-NET "vgaRed<2>"   LOC = "T8"; # Bank = 2, Pin name = IO_L10N_2, Type = I/O, Sch name = RED1
-NET "vgaRed<3>"   LOC = "R8"; # Bank = 2, Pin name = IO_L10P_2, Type = I/O, Sch name = RED2
-NET "vgaGreen<1>" LOC = "N8"; # Bank = 2, Pin name = IO_L09N_2, Type = I/O, Sch name = GRN0
-NET "vgaGreen<2>" LOC = "P8"; # Bank = 2, Pin name = IO_L09P_2, Type = I/O, Sch name = GRN1
-NET "vgaGreen<3>" LOC = "P6"; # Bank = 2, Pin name = IO_L05N_2, Type = I/O, Sch name = GRN2
-NET "vgaBlue<2>"  LOC = "U5"; # Bank = 2, Pin name = IO/VREF_2, Type = VREF, Sch name = BLU1
-NET "vgaBlue<3>"  LOC = "U4"; # Bank = 2, Pin name = IO_L03P_2/DOUT/BUSY, Type = DUAL, Sch name = BLU2
+NET "vgaRed<0>"   LOC = "R9"; # Bank = 2, Pin name = IO/D5, Type = DUAL, Sch name = RED0
+NET "vgaRed<1>"   LOC = "T8"; # Bank = 2, Pin name = IO_L10N_2, Type = I/O, Sch name = RED1
+NET "vgaRed<2>"   LOC = "R8"; # Bank = 2, Pin name = IO_L10P_2, Type = I/O, Sch name = RED2
+NET "vgaGreen<0>" LOC = "N8"; # Bank = 2, Pin name = IO_L09N_2, Type = I/O, Sch name = GRN0
+NET "vgaGreen<1>" LOC = "P8"; # Bank = 2, Pin name = IO_L09P_2, Type = I/O, Sch name = GRN1
+NET "vgaGreen<2>" LOC = "P6"; # Bank = 2, Pin name = IO_L05N_2, Type = I/O, Sch name = GRN2
+NET "vgaBlue<0>"  LOC = "U5"; # Bank = 2, Pin name = IO/VREF_2, Type = VREF, Sch name = BLU1
+NET "vgaBlue<1>"  LOC = "U4"; # Bank = 2, Pin name = IO_L03P_2/DOUT/BUSY, Type = DUAL, Sch name = BLU2
  
 NET "HS" LOC = "T4"; # Bank = 2, Pin name = IO_L03N_2/MOSI/CSI_B, Type = DUAL, Sch name = HSYNC
 NET "VS" LOC = "U3"; # Bank = 2, Pin name = IO_L01P_2/CSO_B, Type = DUAL, Sch name = VSYNC
