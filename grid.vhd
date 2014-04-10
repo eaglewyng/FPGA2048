@@ -58,25 +58,29 @@ begin
 ---------------------------------------------------------------
 -- 			Draw Grid Logic
 ---------------------------------------------------------------
-gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 48) or
-							  (unsigned(pixel_y) > 138 and unsigned(pixel_y) <= 144) or
-							  (unsigned(pixel_y) > 236 and unsigned(pixel_y) <= 244) or
-							  (unsigned(pixel_y) > 334 and unsigned(pixel_y) <= 342) or
-							  (unsigned(pixel_y) > 432 and unsigned(pixel_y) <= 440) or
-							  (unsigned(pixel_x) > 120 and unsigned(pixel_x) <= 128) or
-							  (unsigned(pixel_x) > 218 and unsigned(pixel_x) <= 226) or
-							  (unsigned(pixel_x) > 316 and unsigned(pixel_x) <= 324) or
-							  (unsigned(pixel_x) > 414 and unsigned(pixel_x) <= 422) or
-							  (unsigned(pixel_x) > 512 and unsigned(pixel_x) <= 520)) else
+
+gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 440) and
+							(unsigned(pixel_x) > 120 and unsigned(pixel_x) <=520)) else
+			'0';
+--gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 48) or
+	--						  (unsigned(pixel_y) > 138 and unsigned(pixel_y) <= 144) or
+		--					  (unsigned(pixel_y) > 236 and unsigned(pixel_y) <= 244) or
+			--				  (unsigned(pixel_y) > 334 and unsigned(pixel_y) <= 342) or
+				--			  (unsigned(pixel_y) > 432 and unsigned(pixel_y) <= 440) or
+					--		  (unsigned(pixel_x) > 120 and unsigned(pixel_x) <= 128) or
+						--	  (unsigned(pixel_x) > 218 and unsigned(pixel_x) <= 226) or
+							--(unsigned(pixel_x) > 316 and unsigned(pixel_x) <= 324) or
+						--	  (unsigned(pixel_x) > 414 and unsigned(pixel_x) <= 422) or
+					--		  (unsigned(pixel_x) > 512 and unsigned(pixel_x) <= 520)) else
+			--	'0';
+
+
+draw_grid <= '1' when unsigned(rgbOut) > 0 else
 				'0';
-
-
-draw_grid <= gridOn;
 ---------------------------------------------------------------
 --				Grid/Box Color Logic
 ---------------------------------------------------------------
-rgbOut <= grid_color when gridOn = '1' else
-			 rgb1 when drawbox1 = '1' else
+rgbOut <= rgb1 when drawbox1 = '1' else
 			 rgb2 when drawbox2 = '1' else
 			 rgb3 when drawbox3 = '1' else
 			 rgb4 when drawbox4 = '1' else
@@ -92,6 +96,7 @@ rgbOut <= grid_color when gridOn = '1' else
 			 rgb14 when drawbox14 = '1' else
 			 rgb15 when drawbox15 = '1' else
 			 rgb16 when drawbox16 = '1' else
+			 grid_color when gridOn = '1' else
 			 "00000000";
 
 
