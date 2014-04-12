@@ -16,9 +16,7 @@ entity Grid is
 				btn : in std_logic_vector(3 downto 0);
 				draw_grid : out std_logic;
 				rgbOut : out std_logic_vector(7 downto 0);
-				gameOver : out std_logic;
-				score : UNSIGNED(15 downto 0)
-
+				gameOver : out std_logic
 	);
 end Grid;
 
