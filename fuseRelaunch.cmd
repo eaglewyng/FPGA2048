@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/Parker Ridd/Dropbox/Classes/ECEn320/FPGA2048/FPGA2048/Game_isim_beh.exe" -prj "C:/Users/Parker Ridd/Dropbox/Classes/ECEn320/FPGA2048/FPGA2048/Game_beh.prj" "work.Game" 

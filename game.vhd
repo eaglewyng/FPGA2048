@@ -84,7 +84,7 @@ begin
 	------------------Registers---------------------------------------------------
 	--============================================================================
 	
-	rst <= sw0;
+	rst <= not sw0;
 	--state register
 	process(clk, sw0)
 	begin
@@ -148,7 +148,8 @@ begin
 	vgaGreen <= rgbOut(4 downto 2);
 	vgaBlue <= rgbOut(1 downto 0);
 
-	rgbOut <= rgbFromGrid when draw_grid = '1' and blank = '0' else
+	rgbOut <= rgbFromGrid when draw_grid = '1'  else
+				 "00000000" when blank = '1' else
 				 "11111111";
 
 	-------------------------------------------------------------
@@ -172,7 +173,7 @@ begin
 				clk => clk,
 				data_in => "1111111111111111", 
 				dp_in => "1111",
-				blank => "1111",
+				blank => "0000",
 				seg => seg,
 				dp => dp,
 				an => an
