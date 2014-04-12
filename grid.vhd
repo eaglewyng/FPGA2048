@@ -22,16 +22,19 @@ entity Grid is
 end Grid;
 
 architecture Behavioral of Grid is
+	
+	--grid signals
 	signal gridOn : std_logic;
-
+	signal rgbWire : std_logic_vector(7 downto 0);
 	signal rgb1,rgb2,rgb3,rgb4,rgb5,rgb6,rgb7,rgb8,rgb9,rgb10,rgb11,
 	rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
 	signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
 	drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
 
+
 	-- 16 wires of 12 bits each
 	type value is array (15 downto 0) of unsigned(11 downto 0);
-	signal boxValues, boxValues_next: value; 
+	signal boxValues, boxValues_next: value;
 	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
 	signal btn_posedge : STD_LOGIC_VECTOR(3 downto 0);
@@ -43,6 +46,7 @@ architecture Behavioral of Grid is
 	--state register
 	type state_type is(idle, randupdate);
 	signal state_reg, state_next : state_type;
+	
 
 begin
 
@@ -74,31 +78,31 @@ gridOn <= '1' when ((unsigned(pixel_y) > 40 and unsigned(pixel_y) <= 440) and
 					--		  (unsigned(pixel_x) > 512 and unsigned(pixel_x) <= 520)) else
 			--	'0';
 
-
-draw_grid <= '1' when unsigned(rgbOut) > 0 else
+draw_grid <= '1' when unsigned(rgbWire) > 0 else
 				'0';
 ---------------------------------------------------------------
 --				Grid/Box Color Logic
 ---------------------------------------------------------------
-rgbOut <= rgb1 when drawbox1 = '1' else
-			 rgb2 when drawbox2 = '1' else
-			 rgb3 when drawbox3 = '1' else
-			 rgb4 when drawbox4 = '1' else
-			 rgb5 when drawbox5 = '1' else
-			 rgb6 when drawbox6 = '1' else
-			 rgb7 when drawbox7 = '1' else
-			 rgb8 when drawbox8 = '1' else
-			 rgb9 when drawbox9 = '1' else
-			 rgb10 when drawbox10 = '1' else
-			 rgb11 when drawbox11 = '1' else
-			 rgb12 when drawbox12 = '1' else
-			 rgb13 when drawbox13 = '1' else
-			 rgb14 when drawbox14 = '1' else
-			 rgb15 when drawbox15 = '1' else
-			 rgb16 when drawbox16 = '1' else
-			 grid_color when gridOn = '1' else
-			 "00000000";
-
+rgbWire <= rgb1 when drawbox1 = '1' else
+			  rgb2 when drawbox2 = '1' else
+			  rgb3 when drawbox3 = '1' else
+			  rgb4 when drawbox4 = '1' else
+			  rgb5 when drawbox5 = '1' else
+			  rgb6 when drawbox6 = '1' else
+		 	  rgb7 when drawbox7 = '1' else
+			  rgb8 when drawbox8 = '1' else
+	 		  rgb9 when drawbox9 = '1' else
+			  rgb10 when drawbox10 = '1' else
+			  rgb11 when drawbox11 = '1' else
+		 	  rgb12 when drawbox12 = '1' else
+			  rgb13 when drawbox13 = '1' else
+			  rgb14 when drawbox14 = '1' else
+			  rgb15 when drawbox15 = '1' else
+			  rgb16 when drawbox16 = '1' else
+			  grid_color when gridOn = '1' else
+			  "00000000";
+			 
+rgbOut <= rgbWire;
 
 --============================================================================
 ------------------Entity Instantiations---------------------------------------
