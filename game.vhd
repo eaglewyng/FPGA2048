@@ -26,10 +26,7 @@ architecture Behavioral of Game is
 
 --GAME SIGNALS
 signal rst : std_logic;
-
-signal score, score_temp, score_next : unsigned(15 downto 0);
-
-
+signal score : natural;
 type state is (start, playing, endGame);
 signal state_reg, state_next : state; 
 signal rgbOut : std_logic_vector(7 downto 0);
@@ -70,13 +67,11 @@ signal pixel_y : std_logic_vector(9 downto 0);
 	--============================================================================
 	------------------Constant values---------------------------------------------
 	--============================================================================
-	constant CLK_RATE : NATURAL := 50_000_000;
-	constant DEBOUNCE_RATE : NATURAL := 100;
-	constant DEBOUNCE_DELAY_MAX_VAL : NATURAL := CLK_RATE / DEBOUNCE_RATE - 1;
-	constant DELAY_COUNTER_BITS : NATURAL := log2c(DEBOUNCE_DELAY_MAX_VAL);	
-	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);                 --sync reset to zero
-   signal deb_counter_out, deb_counter_next : UNSIGNED(DELAY_COUNTER_BITS-1 DOWNTO 0) := (OTHERS => '0'); --counter output
+	constant COUNTER_SIZE : natural := 19;
+	signal btn_int1Debounced, btn_int1Debounced_next, btn_int2Debounced, btn_int2Debounced_next : STD_LOGIC_VECTOR(3 downto 0);                 
+   signal deb_counter_out, deb_counter_next : UNSIGNED(COUNTER_SIZE downto 0) := (OTHERS => '0'); --counter output
 	signal btn_debounced, btn_debounced_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal counter_set : STD_LOGIC;
 	
 	
 
@@ -87,11 +82,11 @@ begin
 	------------------Registers---------------------------------------------------
 	--============================================================================
 	
-	rst <= sw0;
+	rst <= not sw0;
 	--state register
-	process(clk, sw0)
+	process(clk, rst)
 	begin
-		if sw0 = '0' then
+		if rst = '1' then
 			state_reg <= start;
 		elsif rising_edge(clk) then
 			state_reg <= state_next;
@@ -142,22 +137,7 @@ begin
 
 			end case;
 	end process;
-	
-	-------------------------------------------------------------
-	--		Game Logic for SevenSeg -- SCORE
-	-------------------------------------------------------------
-	
-	--will it add score_next to score every clock cycle??
-	process(clk, rst)
-	begin
-		if (sw0 = '1') then
-			score <= (others => '0');
-		elsif rising_edge(clk) then
-			score <= score_next;
-		end if;
-	end process;
-	score_next <= score + score_temp;
-	
+
 	-------------------------------------------------------------
 	--		Game Logic for VGA
 	-------------------------------------------------------------
@@ -166,7 +146,8 @@ begin
 	vgaGreen <= rgbOut(4 downto 2);
 	vgaBlue <= rgbOut(1 downto 0);
 
-	rgbOut <= rgbFromGrid when draw_grid = '1' and blank = '0' else
+	rgbOut <= rgbFromGrid when draw_grid = '1'  else
+				 "00000000" when blank = '1' else
 				 "11111111";
 
 	-------------------------------------------------------------
@@ -182,8 +163,7 @@ begin
 				btn => btn_debounced,
 				draw_grid => draw_grid,
 				rgbOut => rgbFromGrid,
-				gameOver => game_over,
-				score => score_temp
+				gameOver => game_over
 				);
 
 	SevenSeg : entity work.seven_segment_display
@@ -213,25 +193,29 @@ begin
 		--============================================================================
 		------------------Debouncer Circuit-------------------------------------------
 		--============================================================================
-	process(clk, sw0)
+	process(clk, rst)
 	begin
-		if(sw0 = '1') then
-			btn_intdebounced <= (others => '0');
+		if(rst = '1') then
+			btn_int1debounced <= (others => '0');
+			btn_int2debounced <= (others => '0');
 			btn_debounced <= (others => '0');
 			deb_counter_out <= (others => '0');
 		elsif(clk'event and clk = '1') then
-			btn_intdebounced <= btn_intdebounced_next;
+			btn_int1debounced <= btn_int1debounced_next;
+			btn_int2debounced <= btn_int2debounced_next;
 			btn_debounced <= btn_debounced_next;
 			deb_counter_out <= deb_counter_next;
 		end if;
 	end process;
 	
-	
-	deb_counter_next <= (others => '0') when btn_debounced /= btn_intdebounced else
+	counter_set <= '1' when btn_int2debounced /= btn_int1debounced else
+						'0';
+	deb_counter_next <= (others => '0') when counter_set = '1' else
 								deb_counter_out + 1;
 	
-	btn_intdebounced_next <= btn;
-	btn_debounced_next <= btn_intdebounced;
-
+	btn_int1debounced_next <= btn;
+	btn_int2debounced_next <= btn_int1debounced;
+	btn_debounced_next <= btn_int2debounced when deb_counter_out(COUNTER_SIZE) = '1' else
+								btn_debounced;
 
 	end Behavioral;
