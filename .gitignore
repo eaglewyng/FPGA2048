@@ -62,3 +62,5 @@ isim/
 *.log
 pa.fromNetlist.tcl
 planAhead_run_1/planAhead.jou
+Game_isim_beh.wdb
+*.wdb
