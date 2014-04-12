@@ -809,347 +809,252 @@ rgbOut <= rgbWire;
 			when "0001" =>
 				--first row
 				if(boxValues(2) > 0 and boxValues(3) = 0) then
-					boxValues_next(0) <= UNSIGNED(0, 12);
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
 					boxValues_next(1) <= boxValues(0);
 					boxValues_next(2) <= boxValues(1);
 					boxValues_next(3) <= boxValues(2);
 				 elsif(boxValues(1) > 0 and boxValues(2) = 0) then
-					boxValues_next(0) <= UNSIGNED(0, 12);
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
 					boxValues_next(1) <= boxValues(0);
 					boxValues_next(2) <= boxValues(1);
 				elsif(boxValues(0) > 0 and boxValues(1) = 0) then
-					boxValues_next(0) <= UNSIGNED(0, 12);
-					boxValues_next(1) <= UNSIGNED(boxValues(0));			
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
+					boxValues_next(1) <= boxValues(0);			
 				end if;
 				
 				
 				--second row
 				if(boxValues(6) > 0 and boxValues(7) = 0) then
-					boxValues_next(4) <= UNSIGNED(0, 12);
+					boxValues_next(4) <= TO_UNSIGNED(0, 12);
 					boxValues_next(5) <= boxValues(4);
 					boxValues_next(6) <= boxValues(5);
 					boxValues_next(7) <= boxValues(6);
 				 elsif(boxValues(5) > 0 and boxValues(6) = 0) then
-					boxValues_next(4) <= UNSIGNED(0, 12);
+					boxValues_next(4) <= TO_UNSIGNED(0, 12);
 					boxValues_next(5) <= boxValues(4);
 					boxValues_next(6) <= boxValues(5);
 				elsif(boxValues(4) > 0 and boxValues(5) = 0) then
-					boxValues_next(4) <= UNSIGNED(0, 12);
-					boxValues_next(5) <= UNSIGNED(boxValues(4));			
+					boxValues_next(4) <= TO_UNSIGNED(0, 12);
+					boxValues_next(5) <= boxValues(4);			
 				end if;
 				
 				--third row
 				if(boxValues(10) > 0 and boxValues(11) = 0) then
-					boxValues_next(8) <= UNSIGNED(0, 12);
+					boxValues_next(8) <= TO_UNSIGNED(0, 12);
 					boxValues_next(9) <= boxValues(8);
 					boxValues_next(10) <= boxValues(9);
 					boxValues_next(11) <= boxValues(10);
 				 elsif(boxValues(9) > 0 and boxValues(10) = 0) then
-					boxValues_next(8) <= UNSIGNED(0, 12);
+					boxValues_next(8) <= TO_UNSIGNED(0, 12);
 					boxValues_next(9) <= boxValues(8);
 					boxValues_next(10) <= boxValues(9);
 				elsif(boxValues(8) > 0 and boxValues(9) = 0) then
-					boxValues_next(8) <= UNSIGNED(0, 12);
-					boxValues_next(9) <= UNSIGNED(boxValues(8));			
+					boxValues_next(8) <= TO_UNSIGNED(0, 12);
+					boxValues_next(9) <= boxValues(8);			
 				end if;
 				
 				--fourth row
 				if(boxValues(14) > 0 and boxValues(15) = 0) then
-					boxValues_next(12) <= UNSIGNED(0, 12);
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
 					boxValues_next(13) <= boxValues(12);
 					boxValues_next(14) <= boxValues(13);
 					boxValues_next(15) <= boxValues(14);
 				 elsif(boxValues(13) > 0 and boxValues(14) = 0) then
-					boxValues_next(12) <= UNSIGNED(0, 12);
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
 					boxValues_next(13) <= boxValues(12);
 					boxValues_next(14) <= boxValues(13);
 				elsif(boxValues(12) > 0 and boxValues(13) = 0) then
-					boxValues_next(12) <= UNSIGNED(0, 12);
-					boxValues_next(13) <= UNSIGNED(boxValues(12));			
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
+					boxValues_next(13) <= boxValues(12);			
 				end if;
 			
 			--left button
 			when "0010" =>
 				--first row
-				if(boxValues(0) = boxValues(1) and boxValues(2) = boxValues(3)) then
-					boxValues_next(0) <= boxValues(0) + boxValues(1);
-					boxValues_next(1) <= boxValues(2) + boxValues(3);	
-					boxValues_next(2) <= (others => '0');
-					boxValues_next(3) <= (others => '0');	
-				elsif(boxValues(0) = boxValues(1)) then
-					boxValues_next(0) <= boxValues(0) + boxValues(1);
+				if(boxValues(1) > 0 and boxValues(0) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
+					boxValues_next(2) <= boxValues(3);
 					boxValues_next(1) <= boxValues(2);
+					boxValues_next(0) <= boxValues(1);
+				 elsif(boxValues(2) > 0 and boxValues(1) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
 					boxValues_next(2) <= boxValues(3);
-					boxValues_next(3) <= (others => '0');					
-				elsif(boxValues(1) = boxvalues(2)) then
-					boxValues_next(0) <= boxValues(0);
-					boxValues_next(1) <= boxValues(1) + boxValues(2);
-					boxValues_next(2) <= boxValues(3);
-					boxValues_next(3) <= (others => '0');
-				elsif(boxValues(2) = boxValues(3)) then
-					boxValues_next(0) <= boxValues(0);
-					boxValues_next(1) <= boxValues(1);
-					boxValues_next(2) <= boxValues(2) + boxValues(3);
-					boxValues_next(3) <= (others => '0');
+					boxValues_next(1) <= boxValues(2);
+				elsif(boxValues(3) > 0 and boxValues(2) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
+					boxValues_next(2) <= boxValues(3);			
 				end if;
 				
 				--second row
-				if(boxValues(4) = boxValues(5) and boxValues(6) = boxValues(7)) then
-					boxValues_next(4) <= boxValues(4) + boxValues(5);
-					boxValues_next(5) <= boxValues(6) + boxValues(7);	
-					boxValues_next(6) <= (others => '0');
-					boxValues_next(7) <= (others => '0');	
-				elsif(boxValues(4) = boxValues(5)) then
-					boxValues_next(4) <= boxValues(4) + boxValues(5);
+				if(boxValues(5) > 0 and boxValues(4) = 0) then
+					boxValues_next(7) <= TO_UNSIGNED(0, 12);
+					boxValues_next(6) <= boxValues(7);
 					boxValues_next(5) <= boxValues(6);
+					boxValues_next(4) <= boxValues(5);
+				 elsif(boxValues(6) > 0 and boxValues(5) = 0) then
+					boxValues_next(7) <= TO_UNSIGNED(0, 12);
 					boxValues_next(6) <= boxValues(7);
-					boxValues_next(7) <= (others => '0');					
-				elsif(boxValues(5) = boxvalues(6)) then
-					boxValues_next(4) <= boxValues(4);
-					boxValues_next(5) <= boxValues(5) + boxValues(6);
-					boxValues_next(6) <= boxValues(7);
-					boxValues_next(7) <= (others => '0');
-				elsif(boxValues(6) = boxValues(7)) then
-					boxValues_next(4) <= boxValues(4);
-					boxValues_next(5) <= boxValues(5);
-					boxValues_next(6) <= boxValues(6) + boxValues(7);
-					boxValues_next(7) <= (others => '0');
+					boxValues_next(5) <= boxValues(6);
+				elsif(boxValues(7) > 0 and boxValues(6) = 0) then
+					boxValues_next(7) <= TO_UNSIGNED(0, 12);
+					boxValues_next(6) <= boxValues(7);			
 				end if;
 				
 				--third row
-				if(boxValues(8) = boxValues(9) and boxValues(10) = boxValues(11)) then
-					boxValues_next(8) <= boxValues(8) + boxValues(9);
-					boxValues_next(9) <= boxValues(10) + boxValues(11);	
-					boxValues_next(10) <= (others => '0');
-					boxValues_next(11) <= (others => '0');	
-				elsif(boxValues(8) = boxValues(9)) then
-					boxValues_next(8) <= boxValues(8) + boxValues(9);
+				if(boxValues(9) > 0 and boxValues(8) = 0) then
+					boxValues_next(11) <= TO_UNSIGNED(0, 12);
+					boxValues_next(10) <= boxValues(11);
 					boxValues_next(9) <= boxValues(10);
+					boxValues_next(8) <= boxValues(9);
+				 elsif(boxValues(10) > 0 and boxValues(9) = 0) then
+					boxValues_next(11) <= TO_UNSIGNED(0, 12);
 					boxValues_next(10) <= boxValues(11);
-					boxValues_next(11) <= (others => '0');					
-				elsif(boxValues(9) = boxvalues(10)) then
-					boxValues_next(8) <= boxValues(8);
-					boxValues_next(9) <= boxValues(9) + boxValues(10);
-					boxValues_next(10) <= boxValues(11);
-					boxValues_next(11) <= (others => '0');
-				elsif(boxValues(10) = boxValues(11)) then
-					boxValues_next(8) <= boxValues(8);
-					boxValues_next(9) <= boxValues(9);
-					boxValues_next(10) <= boxValues(10) + boxValues(11);
-					boxValues_next(11) <= (others => '0');
+					boxValues_next(9) <= boxValues(10);
+				elsif(boxValues(11) > 0 and boxValues(10) = 0) then
+					boxValues_next(11) <= TO_UNSIGNED(0, 12);
+					boxValues_next(10) <= boxValues(11);			
 				end if;
 				
 				--fourth row
-				if(boxValues(12) = boxValues(13) and boxValues(14) = boxValues(15)) then
-					boxValues_next(12) <= boxValues(12) + boxValues(13);
-					boxValues_next(13) <= boxValues(14) + boxValues(15);	
-					boxValues_next(14) <= (others => '0');
-					boxValues_next(15) <= (others => '0');	
-				elsif(boxValues(12) = boxValues(13)) then
-					boxValues_next(12) <= boxValues(12) + boxValues(13);
+				if(boxValues(13) > 0 and boxValues(12) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
+					boxValues_next(14) <= boxValues(15);
 					boxValues_next(13) <= boxValues(14);
+					boxValues_next(12) <= boxValues(13);
+				 elsif(boxValues(14) > 0 and boxValues(13) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
 					boxValues_next(14) <= boxValues(15);
-					boxValues_next(15) <= (others => '0');					
-				elsif(boxValues(13) = boxvalues(14)) then
-					boxValues_next(12) <= boxValues(12);
-					boxValues_next(13) <= boxValues(13) + boxValues(14);
-					boxValues_next(14) <= boxValues(15);
-					boxValues_next(15) <= (others => '0');
-				elsif(boxValues(14) = boxValues(15)) then
-					boxValues_next(12) <= boxValues(12);
-					boxValues_next(13) <= boxValues(13);
-					boxValues_next(14) <= boxValues(14) + boxValues(15);
-					boxValues_next(15) <= (others => '0');
+					boxValues_next(13) <= boxValues(14);
+				elsif(boxValues(15) > 0 and boxValues(14) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
+					boxValues_next(14) <= boxValues(15);			
 				end if;
 				
 			--down button
 			when "0100" =>
 				--first column
-				if(boxValues(0) = boxValues(4) and boxValues(8) = boxValues(12)) then
-					boxValues_next(0) <= (others => '0');
-					boxValues_next(4) <= (others => '0');
-					boxValues_next(8) <= boxValues(0) + boxValues(4);
-					boxValues_next(12) <= boxValues(8) + boxValues(12);	
-				elsif(boxValues(8) = boxValues(12)) then
-					boxValues_next(0) <= (others => '0');
+				if(boxValues(8) > 0 and boxValues(12) = 0) then
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
 					boxValues_next(4) <= boxValues(0);
 					boxValues_next(8) <= boxValues(4);
-					boxValues_next(12) <= boxValues(8) + boxValues(12);
-				elsif(boxValues(4) = boxValues(8)) then
-					boxValues_next(0) <= (others => '0');
+					boxValues_next(12) <= boxValues(8);
+				 elsif(boxValues(4) > 0 and boxValues(8) = 0) then
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
 					boxValues_next(4) <= boxValues(0);
-					boxValues_next(8) <= boxValues(4) + boxValues(8);
-					boxValues_next(12) <= boxValues(12);
-				elsif(boxValues(0) = boxValues(4)) then
-					boxValues_next(0) <= (others => '0');
-					boxValues_next(4) <= boxValues(0) + boxValues(4);
-					boxValues_next(8) <= boxValues(8);
-					boxValues_next(12) <= boxValues(12);
+					boxValues_next(8) <= boxValues(4);
+				elsif(boxValues(0) > 0 and boxValues(4) = 0) then
+					boxValues_next(0) <= TO_UNSIGNED(0, 12);
+					boxValues_next(4) <= boxValues(0);			
 				end if;
 				
 				--second column
-				if(boxValues(1) = boxValues(5) and boxValues(9) = boxValues(13)) then
-					boxValues_next(1) <= (others => '0');
-					boxValues_next(5) <= (others => '0');
-					boxValues_next(9) <= boxValues(1) + boxValues(5);
-					boxValues_next(13) <= boxValues(9) + boxValues(13);	
-				elsif(boxValues(9) = boxValues(13)) then
-					boxValues_next(1) <= (others => '0');
+				if(boxValues(9) > 0 and boxValues(13) = 0) then
+					boxValues_next(1) <= TO_UNSIGNED(0, 12);
 					boxValues_next(5) <= boxValues(1);
 					boxValues_next(9) <= boxValues(5);
-					boxValues_next(13) <= boxValues(9) + boxValues(13);
-				elsif(boxValues(5) = boxValues(9)) then
-					boxValues_next(1) <= (others => '0');
+					boxValues_next(13) <= boxValues(9);
+				 elsif(boxValues(5) > 0 and boxValues(9) = 0) then
+					boxValues_next(1) <= TO_UNSIGNED(0, 12);
 					boxValues_next(5) <= boxValues(1);
-					boxValues_next(9) <= boxValues(5) + boxValues(9);
-					boxValues_next(13) <= boxValues(13);
-				elsif(boxValues(1) = boxValues(5)) then
-					boxValues_next(1) <= (others => '0');
-					boxValues_next(5) <= boxValues(1) + boxValues(5);
-					boxValues_next(9) <= boxValues(9);
-					boxValues_next(13) <= boxValues(13);
+					boxValues_next(9) <= boxValues(5);
+				elsif(boxValues(1) > 0 and boxValues(5) = 0) then
+					boxValues_next(1) <= TO_UNSIGNED(0, 12);
+					boxValues_next(5) <= boxValues(1);			
 				end if;
 				
 				--third column
-				if(boxValues(2) = boxValues(6) and boxValues(10) = boxValues(14)) then
-					boxValues_next(2) <= (others => '0');
-					boxValues_next(6) <= (others => '0');
-					boxValues_next(10) <= boxValues(2) + boxValues(6);
-					boxValues_next(14) <= boxValues(10) + boxValues(14);	
-				elsif(boxValues(10) = boxValues(14)) then
-					boxValues_next(2) <= (others => '0');
+				if(boxValues(10) > 0 and boxValues(14) = 0) then
+					boxValues_next(2) <= TO_UNSIGNED(0, 12);
 					boxValues_next(6) <= boxValues(2);
 					boxValues_next(10) <= boxValues(6);
-					boxValues_next(14) <= boxValues(10) + boxValues(14);
-				elsif(boxValues(6) = boxValues(10)) then
-					boxValues_next(2) <= (others => '0');
+					boxValues_next(14) <= boxValues(10);
+				 elsif(boxValues(6) > 0 and boxValues(10) = 0) then
+					boxValues_next(2) <= TO_UNSIGNED(0, 12);
 					boxValues_next(6) <= boxValues(2);
-					boxValues_next(10) <= boxValues(6) + boxValues(10);
-					boxValues_next(14) <= boxValues(14);
-				elsif(boxValues(2) = boxValues(6)) then
-					boxValues_next(2) <= (others => '0');
-					boxValues_next(6) <= boxValues(2) + boxValues(6);
-					boxValues_next(10) <= boxValues(10);
-					boxValues_next(14) <= boxValues(14);
+					boxValues_next(10) <= boxValues(6);
+				elsif(boxValues(2) > 0 and boxValues(6) = 0) then
+					boxValues_next(2) <= TO_UNSIGNED(0, 12);
+					boxValues_next(6) <= boxValues(2);			
 				end if;
 				
 				--fourth column				
-				if(boxValues(3) = boxValues(7) and boxValues(11) = boxValues(15)) then
-					boxValues_next(3) <= (others => '0');
-					boxValues_next(7) <= (others => '0');
-					boxValues_next(11) <= boxValues(3) + boxValues(7);
-					boxValues_next(15) <= boxValues(11) + boxValues(15);	
-				elsif(boxValues(11) = boxValues(15)) then
-					boxValues_next(3) <= (others => '0');
+				if(boxValues(11) > 0 and boxValues(15) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
 					boxValues_next(7) <= boxValues(3);
 					boxValues_next(11) <= boxValues(7);
-					boxValues_next(15) <= boxValues(11) + boxValues(15);
-				elsif(boxValues(7) = boxValues(11)) then
-					boxValues_next(3) <= (others => '0');
+					boxValues_next(15) <= boxValues(11);
+				 elsif(boxValues(7) > 0 and boxValues(11) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
 					boxValues_next(7) <= boxValues(3);
-					boxValues_next(11) <= boxValues(7) + boxValues(11);
-					boxValues_next(15) <= boxValues(15);
-				elsif(boxValues(3) = boxValues(7)) then
-					boxValues_next(3) <= (others => '0');
-					boxValues_next(7) <= boxValues(3) + boxValues(7);
-					boxValues_next(11) <= boxValues(11);
-					boxValues_next(15) <= boxValues(15);
+					boxValues_next(11) <= boxValues(7);
+				elsif(boxValues(3) > 0 and boxValues(7) = 0) then
+					boxValues_next(3) <= TO_UNSIGNED(0, 12);
+					boxValues_next(7) <= boxValues(3);			
 				end if;
 				
 			
 			--up button
 			when "1000" =>
 				--first column
-				if(boxValues(0) = boxValues(4) and boxValues(8) = boxValues(12)) then
-					boxValues_next(0) <= boxValues(0) + boxValues(4);
-					boxValues_next(4) <= boxValues(8) + boxValues(12);	
-					boxValues_next(8) <= (others => '0');
-					boxValues_next(12) <= (others => '0');	
-				elsif(boxValues(0) = boxValues(4)) then
-					boxValues_next(0) <= boxValues(0) + boxValues(4);
+				if(boxValues(4) > 0 and boxValues(0) = 0) then
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
+					boxValues_next(8) <= boxValues(12);
 					boxValues_next(4) <= boxValues(8);
+					boxValues_next(0) <= boxValues(4);
+				 elsif(boxValues(8) > 0 and boxValues(4) = 0) then
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
 					boxValues_next(8) <= boxValues(12);
-					boxValues_next(12) <= (others => '0');					
-				elsif(boxValues(4) = boxvalues(8)) then
-					boxValues_next(0) <= boxValues(0);
-					boxValues_next(4) <= boxValues(4) + boxValues(8);
-					boxValues_next(8) <= boxValues(12);
-					boxValues_next(12) <= (others => '0');
-				elsif(boxValues(8) = boxValues(12)) then
-					boxValues_next(0) <= boxValues(0);
-					boxValues_next(4) <= boxValues(4);
-					boxValues_next(8) <= boxValues(8) + boxValues(12);
-					boxValues_next(12) <= (others => '0');
+					boxValues_next(4) <= boxValues(8);
+				elsif(boxValues(12) > 0 and boxValues(8) = 0) then
+					boxValues_next(12) <= TO_UNSIGNED(0, 12);
+					boxValues_next(8) <= boxValues(12);			
 				end if;
 				
 				--second column
-				if(boxValues(1) = boxValues(5) and boxValues(9) = boxValues(13)) then
-					boxValues_next(1) <= boxValues(1) + boxValues(5);
-					boxValues_next(5) <= boxValues(9) + boxValues(13);	
-					boxValues_next(9) <= (others => '0');
-					boxValues_next(13) <= (others => '0');	
-				elsif(boxValues(1) = boxValues(5)) then
-					boxValues_next(1) <= boxValues(1) + boxValues(5);
+				if(boxValues(5) > 0 and boxValues(1) = 0) then
+					boxValues_next(13) <= TO_UNSIGNED(0, 12);
+					boxValues_next(9) <= boxValues(13);
 					boxValues_next(5) <= boxValues(9);
+					boxValues_next(1) <= boxValues(5);
+				 elsif(boxValues(9) > 0 and boxValues(5) = 0) then
+					boxValues_next(13) <= TO_UNSIGNED(0, 12);
 					boxValues_next(9) <= boxValues(13);
-					boxValues_next(13) <= (others => '0');					
-				elsif(boxValues(5) = boxvalues(9)) then
-					boxValues_next(1) <= boxValues(1);
-					boxValues_next(5) <= boxValues(5) + boxValues(9);
-					boxValues_next(9) <= boxValues(13);
-					boxValues_next(13) <= (others => '0');
-				elsif(boxValues(9) = boxValues(13)) then
-					boxValues_next(1) <= boxValues(1);
-					boxValues_next(5) <= boxValues(5);
-					boxValues_next(9) <= boxValues(9) + boxValues(13);
-					boxValues_next(13) <= (others => '0');
+					boxValues_next(5) <= boxValues(9);
+				elsif(boxValues(13) > 0 and boxValues(9) = 0) then
+					boxValues_next(13) <= TO_UNSIGNED(0, 12);
+					boxValues_next(9) <= boxValues(13);			
 				end if;
 				
 				--third column
-				if(boxValues(2) = boxValues(6) and boxValues(10) = boxValues(14)) then
-					boxValues_next(2) <= boxValues(2) + boxValues(6);
-					boxValues_next(6) <= boxValues(10) + boxValues(14);	
-					boxValues_next(10) <= (others => '0');
-					boxValues_next(14) <= (others => '0');	
-				elsif(boxValues(2) = boxValues(6)) then
-					boxValues_next(2) <= boxValues(2) + boxValues(6);
+				if(boxValues(6) > 0 and boxValues(2) = 0) then
+					boxValues_next(14) <= TO_UNSIGNED(0, 12);
+					boxValues_next(10) <= boxValues(14);
 					boxValues_next(6) <= boxValues(10);
+					boxValues_next(2) <= boxValues(6);
+				 elsif(boxValues(10) > 0 and boxValues(6) = 0) then
+					boxValues_next(14) <= TO_UNSIGNED(0, 12);
 					boxValues_next(10) <= boxValues(14);
-					boxValues_next(14) <= (others => '0');					
-				elsif(boxValues(6) = boxvalues(10)) then
-					boxValues_next(2) <= boxValues(2);
-					boxValues_next(6) <= boxValues(6) + boxValues(10);
-					boxValues_next(10) <= boxValues(14);
-					boxValues_next(14) <= (others => '0');
-				elsif(boxValues(10) = boxValues(14)) then
-					boxValues_next(2) <= boxValues(2);
-					boxValues_next(6) <= boxValues(6);
-					boxValues_next(10) <= boxValues(10) + boxValues(14);
-					boxValues_next(14) <= (others => '0');
-				end if;
+					boxValues_next(6) <= boxValues(10);
+				elsif(boxValues(14) > 0 and boxValues(10) = 0) then
+					boxValues_next(14) <= TO_UNSIGNED(0, 12);
+					boxValues_next(10) <= boxValues(14);			
+				end if;	
 				
 				--fourth column
-				if(boxValues(3) = boxValues(7) and boxValues(11) = boxValues(15)) then
-					boxValues_next(3) <= boxValues(3) + boxValues(7);
-					boxValues_next(7) <= boxValues(11) + boxValues(15);	
-					boxValues_next(11) <= (others => '0');
-					boxValues_next(15) <= (others => '0');	
-				elsif(boxValues(3) = boxValues(7)) then
-					boxValues_next(3) <= boxValues(3) + boxValues(7);
+				if(boxValues(7) > 0 and boxValues(3) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
+					boxValues_next(11) <= boxValues(15);
 					boxValues_next(7) <= boxValues(11);
+					boxValues_next(3) <= boxValues(7);
+				 elsif(boxValues(11) > 0 and boxValues(7) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
 					boxValues_next(11) <= boxValues(15);
-					boxValues_next(15) <= (others => '0');					
-				elsif(boxValues(7) = boxvalues(11)) then
-					boxValues_next(3) <= boxValues(3);
-					boxValues_next(7) <= boxValues(7) + boxValues(11);
-					boxValues_next(11) <= boxValues(15);
-					boxValues_next(15) <= (others => '0');
-				elsif(boxValues(11) = boxValues(15)) then
-					boxValues_next(3) <= boxValues(3);
-					boxValues_next(7) <= boxValues(7);
-					boxValues_next(11) <= boxValues(11) + boxValues(15);
-					boxValues_next(15) <= (others => '0');
+					boxValues_next(7) <= boxValues(11);
+				elsif(boxValues(15) > 0 and boxValues(11) = 0) then
+					boxValues_next(15) <= TO_UNSIGNED(0, 12);
+					boxValues_next(11) <= boxValues(15);			
 				end if;
+				
 			when others =>
 				state_next <= idle;
 		end case;
