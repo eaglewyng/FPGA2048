@@ -12,7 +12,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="28" />
+   <WVObjectSize size="34" />
    <wvobject fp_name="/game/clk" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -117,12 +117,36 @@
       <obj_property name="ElementShortName">value[11:0]</obj_property>
       <obj_property name="ObjectShortName">value[11:0]</obj_property>
    </wvobject>
-   <wvobject fp_name="/game/btn_intdebounced_next" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">btn_intdebounced_next[3:0]</obj_property>
-      <obj_property name="ObjectShortName">btn_intdebounced_next[3:0]</obj_property>
+   <wvobject fp_name="/game/Grid1/state_reg" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
    </wvobject>
-   <wvobject fp_name="/game/btn_intdebounced" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">btn_intdebounced[3:0]</obj_property>
-      <obj_property name="ObjectShortName">btn_intdebounced[3:0]</obj_property>
+   <wvobject fp_name="/game/Grid1/btn_edgedet" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_edgedet[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn_edgedet[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_posedge" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_posedge[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn_posedge[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_edgedet_next" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_edgedet_next[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn_edgedet_next[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_posedge0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_posedge0</obj_property>
+      <obj_property name="ObjectShortName">btn_posedge0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_posedge1" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_posedge1</obj_property>
+      <obj_property name="ObjectShortName">btn_posedge1</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_posedge2" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_posedge2</obj_property>
+      <obj_property name="ObjectShortName">btn_posedge2</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/btn_posedge3" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_posedge3</obj_property>
+      <obj_property name="ObjectShortName">btn_posedge3</obj_property>
    </wvobject>
 </wave_config>

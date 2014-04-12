@@ -397,9 +397,10 @@ rgbOut <= rgbWire;
 		btn_posedge_next <= btn_posedge;
 		
 		if(state_reg = idle) then
-			btn_posedge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 			if(unsigned(btn_posedge) > 0) then
 				state_next <= merge1;
+			else
+				btn_posedge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 			end if;
 		elsif(state_reg = merge1 or state_reg = merge2 or state_reg = merge3) then
 			--next state logic
