@@ -664,6 +664,6 @@ rgb_color <= number_color when draw_number = '1' else
 	pixel_uy <= UNSIGNED(pixel_y);
 	posXPix <= pixel_ux - XPOS;
 	posYPixInverted <= pixel_uy - YPOS;
-	posYPix <= 90 - posYPixInvered;
+	posYPix <= 90 - posYPixInverted;
 	
 end game_arch;
