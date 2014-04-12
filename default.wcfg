@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="C:/Users/Parker Ridd/Dropbox/Classes/ECEn320/FPGA2048/FPGA2048/Game_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="game" />
+            <top_module name="math_real" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="26" />
+   <wvobject fp_name="/game/clk" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/sw0" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">sw0</obj_property>
+      <obj_property name="ObjectShortName">sw0</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/btn" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">btn[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/seg" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">seg[6:0]</obj_property>
+      <obj_property name="ObjectShortName">seg[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/dp" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">dp</obj_property>
+      <obj_property name="ObjectShortName">dp</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/an" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">an[3:0]</obj_property>
+      <obj_property name="ObjectShortName">an[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/vgared" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vgared[2:0]</obj_property>
+      <obj_property name="ObjectShortName">vgared[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/vgagreen" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vgagreen[2:0]</obj_property>
+      <obj_property name="ObjectShortName">vgagreen[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/vgablue" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">vgablue[1:0]</obj_property>
+      <obj_property name="ObjectShortName">vgablue[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/hs" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">hs</obj_property>
+      <obj_property name="ObjectShortName">hs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/vs" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">vs</obj_property>
+      <obj_property name="ObjectShortName">vs</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/rst" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/score" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">score</obj_property>
+      <obj_property name="ObjectShortName">score</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/state_reg" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_reg</obj_property>
+      <obj_property name="ObjectShortName">state_reg</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/state_next" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">state_next</obj_property>
+      <obj_property name="ObjectShortName">state_next</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/rgbout" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">rgbout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rgbout[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/rgbfromgrid" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">rgbfromgrid[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rgbfromgrid[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/grid_color" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">grid_color[7:0]</obj_property>
+      <obj_property name="ObjectShortName">grid_color[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/isvictory" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">isvictory</obj_property>
+      <obj_property name="ObjectShortName">isvictory</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/game_over" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">game_over</obj_property>
+      <obj_property name="ObjectShortName">game_over</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/draw_grid" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">draw_grid</obj_property>
+      <obj_property name="ObjectShortName">draw_grid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/blank" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">blank</obj_property>
+      <obj_property name="ObjectShortName">blank</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/pixel_x" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pixel_x[9:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_x[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/pixel_y" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pixel_y[9:0]</obj_property>
+      <obj_property name="ObjectShortName">pixel_y[9:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/btn_debounced" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">btn_debounced[3:0]</obj_property>
+      <obj_property name="ObjectShortName">btn_debounced[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/game/Grid1/Box4/value" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">value[11:0]</obj_property>
+      <obj_property name="ObjectShortName">value[11:0]</obj_property>
+   </wvobject>
+</wave_config>

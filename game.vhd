@@ -86,9 +86,9 @@ begin
 	
 	rst <= not sw0;
 	--state register
-	process(clk, sw0)
+	process(clk, rst)
 	begin
-		if sw0 = '0' then
+		if rst = '1' then
 			state_reg <= start;
 		elsif rising_edge(clk) then
 			state_reg <= state_next;

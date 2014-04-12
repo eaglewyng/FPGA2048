@@ -44,7 +44,7 @@ architecture Behavioral of Grid is
 	signal INrandom_num : std_logic_vector(3 downto 0);
 	
 	--state register
-	type state_type is(idle, randupdate);
+	type state_type is(randupdate, idle);
 	signal state_reg, state_next : state_type;
 	
 
