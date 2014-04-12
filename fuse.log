@@ -69,8 +69,8 @@ Compiling architecture behavioral of entity seven_segment_display [seven_segment
 Compiling architecture lab_arch of entity vga_timing [vga_timing_default]
 Compiling architecture behavioral of entity game
 Time Resolution for simulation is 1ps.
-Waiting for 1 sub-compilation(s) to finish...
+Waiting for 8 sub-compilation(s) to finish...
 Compiled 45 VHDL Units
 Built simulation executable C:/Users/Parker Ridd/Dropbox/Classes/ECEn320/FPGA2048/FPGA2048/Game_isim_beh.exe
-Fuse Memory Usage: 37604 KB
-Fuse CPU Usage: 1138 ms
+Fuse Memory Usage: 37564 KB
+Fuse CPU Usage: 998 ms

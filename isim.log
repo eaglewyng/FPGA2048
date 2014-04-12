@@ -146,3 +146,132 @@ at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, r
 at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
 at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
 at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+# restart
+# isim force add clk 1 -value 0 -time 10ns -repeat 20ns
+# put btn 0000
+# put sw0 0
+# run 40ns
+Simulator is doing circuit initialization process.
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.">": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/ : Warning: NUMERIC_STD."=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box1/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box2/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box2/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box2/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box3/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box3/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box3/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box4/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box4/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box4/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box5/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box5/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box5/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box6/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box6/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box6/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box7/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box7/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box7/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box8/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box8/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box8/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box9/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box9/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box9/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box10/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box10/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box10/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box11/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box11/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box11/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box12/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box12/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box12/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box13/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box13/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box13/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box14/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box14/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box14/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box15/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box15/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box15/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+at 0 ps, Instance /game/Grid1/Box16/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box16/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box16/ : Warning: NUMERIC_STD.">=": metavalue detected, returning FALSE
+Finished circuit initialization process.
+at 0 ps, Instance /game/Grid1/Box1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box1/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box2/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box2/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box3/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box3/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box4/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box4/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box5/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box5/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box6/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box6/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box7/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box7/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box8/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box8/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box9/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box9/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box10/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box10/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box11/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box11/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box12/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box12/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box13/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box13/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box14/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box14/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box15/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box15/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box16/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+at 0 ps, Instance /game/Grid1/Box16/ : Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+# put sw0 1
+# run 100ns
+# put btn 0001
+# run 100ns
+# run 12ms

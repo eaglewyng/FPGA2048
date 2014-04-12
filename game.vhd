@@ -67,13 +67,11 @@ signal pixel_y : std_logic_vector(9 downto 0);
 	--============================================================================
 	------------------Constant values---------------------------------------------
 	--============================================================================
-	constant CLK_RATE : NATURAL := 50_000_000;
-	constant DEBOUNCE_RATE : NATURAL := 100;
-	constant DEBOUNCE_DELAY_MAX_VAL : NATURAL := CLK_RATE / DEBOUNCE_RATE - 1;
-	constant DELAY_COUNTER_BITS : NATURAL := log2c(DEBOUNCE_DELAY_MAX_VAL);	
-	signal btn_intDebounced, btn_intDebounced_next : STD_LOGIC_VECTOR(3 downto 0);                 --sync reset to zero
-   signal deb_counter_out, deb_counter_next : UNSIGNED(DELAY_COUNTER_BITS-1 DOWNTO 0) := (OTHERS => '0'); --counter output
+	constant COUNTER_SIZE : natural := 19;
+	signal btn_int1Debounced, btn_int1Debounced_next, btn_int2Debounced, btn_int2Debounced_next : STD_LOGIC_VECTOR(3 downto 0);                 
+   signal deb_counter_out, deb_counter_next : UNSIGNED(COUNTER_SIZE downto 0) := (OTHERS => '0'); --counter output
 	signal btn_debounced, btn_debounced_next : STD_LOGIC_VECTOR(3 downto 0);
+	signal counter_set : STD_LOGIC;
 	
 	
 
@@ -195,25 +193,29 @@ begin
 		--============================================================================
 		------------------Debouncer Circuit-------------------------------------------
 		--============================================================================
-	process(clk, sw0)
+	process(clk, rst)
 	begin
-		if(sw0 = '1') then
-			btn_intdebounced <= (others => '0');
+		if(rst = '1') then
+			btn_int1debounced <= (others => '0');
+			btn_int2debounced <= (others => '0');
 			btn_debounced <= (others => '0');
 			deb_counter_out <= (others => '0');
 		elsif(clk'event and clk = '1') then
-			btn_intdebounced <= btn_intdebounced_next;
+			btn_int1debounced <= btn_int1debounced_next;
+			btn_int2debounced <= btn_int2debounced_next;
 			btn_debounced <= btn_debounced_next;
 			deb_counter_out <= deb_counter_next;
 		end if;
 	end process;
 	
-	
-	deb_counter_next <= (others => '0') when btn_debounced /= btn_intdebounced else
+	counter_set <= '1' when btn_int2debounced /= btn_int1debounced else
+						'0';
+	deb_counter_next <= (others => '0') when counter_set = '1' else
 								deb_counter_out + 1;
 	
-	btn_intdebounced_next <= btn;
-	btn_debounced_next <= btn_intdebounced;
-
+	btn_int1debounced_next <= btn;
+	btn_int2debounced_next <= btn_int1debounced;
+	btn_debounced_next <= btn_int2debounced when deb_counter_out(COUNTER_SIZE) = '1' else
+								btn_debounced;
 
 	end Behavioral;
