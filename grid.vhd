@@ -30,6 +30,17 @@ architecture Behavioral of Grid is
 	rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
 	signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
 	drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
+	signal box1x,box2x,box3x,box4x,box5x,box6x,box7x,box8x,box9x,
+	box10x,box11x,box12x,box13x,box14x,box15x,box16x : UNSIGNED(9 downto 0);
+	signal box1y,box2y,box3y,box4y,box5y,box6y,box7y,box8y,box9y,
+	box10y,box11y,box12y,box13y,box14y,box15y,box16y : UNSIGNED(9 downto 0);
+	signal drawBox_combined : STD_LOGIC_VECTOR(15 downto 0);
+	signal boxValueToDraw : UNSIGNED(11 downto 0);
+	signal boxXToDraw, boxYToDraw : UNSIGNED(9 downto 0);
+	signal draw_number : STD_LOGIC;
+	signal number_color : STD_LOGIC_VECTOR(7 downto 0);
+	signal boxBGRGB : STD_LOGIC_VECTOR(7 downto 0);
+	signal boxFinalRGB : STD_LOGIC_VECTOR(7 downto 0);
 	
 	--score register
 	signal score_reg, score_next : UNSIGNED(15 downto 0);
@@ -1173,16 +1184,719 @@ rgbOut <= rgbWire;
 				end if;
 	end if;
 	end process;
-	
-	
-	
+
 	score <= STD_LOGIC_VECTOR(score_reg);
 	
-
+	--find the array index of the box to draw
+	process(drawBox_combined)
+	begin
+		case drawBox_combined is
+			when "0000000000000001" =>
+				boxValueToDraw <= boxValues(0);
+				boxXToDraw <= box1x;
+				boxYToDraw <= box1y;
+			when "0000000000000010" =>
+				boxValueToDraw <= boxValues(1);
+				boxXToDraw <= box2x;
+				boxYToDraw <= box2y;
+			when "0000000000000100" =>
+				boxValueToDraw <= boxValues(2);
+				boxXToDraw <= box3x;
+				boxYToDraw <= box3y;
+			when "0000000000001000" =>
+				boxValueToDraw <= boxValues(3);
+				boxXToDraw <= box4x;
+				boxYToDraw <= box4y;
+			when "0000000000010000" =>
+				boxValueToDraw <= boxValues(4);
+				boxXToDraw <= box5x;
+				boxYToDraw <= box5y;
+			when "0000000000100000" =>
+				boxValueToDraw <= boxValues(5);
+				boxXToDraw <= box6x;
+				boxYToDraw <= box6y;
+			when "0000000001000000" =>
+				boxValueToDraw <= boxValues(6);
+				boxXToDraw <= box7x;
+				boxYToDraw <= box7y;
+			when "0000000010000000" =>
+				boxValueToDraw <= boxValues(7);
+				boxXToDraw <= box8x;
+				boxYToDraw <= box8y;
+			when "0000000100000000" =>
+				boxValueToDraw <= boxValues(8);
+				boxXToDraw <= box9x;
+				boxYToDraw <= box9y;
+			when "0000001000000000" =>
+				boxValueToDraw <= boxValues(9);
+				boxXToDraw <= box10x;
+				boxYToDraw <= box10y;
+			when "0000010000000000" =>
+				boxValueToDraw <= boxValues(10);
+				boxXToDraw <= box11x;
+				boxYToDraw <= box11y;
+			when "0000100000000000" =>
+				boxValueToDraw <= boxValues(11);
+				boxXToDraw <= box12x;
+				boxYToDraw <= box12y;
+			when "0001000000000000" =>
+				boxValueToDraw <= boxValues(12);
+				boxXToDraw <= box13x;
+				boxYToDraw <= box13y;
+			when "0010000000000000" =>
+				boxValueToDraw <= boxValues(13);
+				boxXToDraw <= box14x;
+				boxYToDraw <= box14y;
+			when "0100000000000000" =>
+				boxValueToDraw <= boxValues(14);
+				boxXToDraw <= box15x;
+				boxYToDraw <= box15y;
+			when "1000000000000000" =>
+				boxValueToDraw <= boxValues(15);
+				boxXToDraw <= box16x;
+				boxYToDraw <= box16y;
+			when others =>
+				boxValueToDraw <= (others => '0');
+				boxXToDraw <= (others => '0');
+				boxYToDraw <= (others => '0');
+		end case;
+	end process;
 	
+	--drawing the box's background
+	with boxValueToDraw select
+		boxBGRGB <=
+			"10001111" when "000000000000",
+			"11111110" when "000000000010",
+			"11111000" when "000000000100",
+			"11110000" when "000000001000",
+			"11100000" when "000000010000",
+			"11001100" when "000000100000",
+			"11011000" when "000001000000",
+			"10011000" when "000010000000",
+			"00011100" when "000100000000", 
+			"00011111" when "001000000000",
+			"00011011" when "010000000000",
+			"00000011" when others;
+			
+	boxFinalRGB <= number_color when draw_number = '1' else
+						boxBGRGB when UNSIGNED(drawBox_Combined) > 0 else
+						"00000000";
+	
+	--drawing the numbers
+	process(boxValueToDraw, pixel_x, pixel_y, boxXToDraw, boxYToDraw)
+	begin
+		draw_number <= '0';
+		number_color <= "00000000";
+		case boxValueToDraw is
+			--0 
+			when "000000000000" =>
+			--don't draw anything
+			
+			--2
+			when "000000000010" =>
+			 if(boxXToDraw >= 30 and boxXToDraw < 60) then
+				if (boxYToDraw >= 20 and boxYToDraw < 30) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 30 and boxYToDraw < 40) then
+					if (boxXToDraw >= 30 and boxXToDraw < 42) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 40 and boxYToDraw < 50) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 50 and boxYToDraw < 60) then
+					if (boxXToDraw >= 48 and boxXToDraw < 60) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 60 and boxYToDraw < 70) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			
+			--4
+			when "000000000100" =>
+				if(boxXToDraw >= 30 and boxXToDraw < 60) then
+					if (boxYToDraw >= 20 and boxYToDraw < 45) then
+						if (boxXToDraw >= 50 and boxXToDraw < 60) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 45 and boxYToDraw < 55) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxYToDraw >= 55 and boxYToDraw < 70) then
+						if (boxXToDraw >= 30 and boxXToDraw < 42) then 
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif (boxXToDraw >= 48 and boxXToDraw < 60) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					end if;
+				end if;
+				
+			--8
+			when "000000001000" =>
+				if(boxXToDraw >= 30 and boxXToDraw < 60) then
+					if (boxYToDraw >= 20 and boxYToDraw < 30) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxYToDraw >= 30 and boxYToDraw < 40) then
+						if (boxXToDraw >= 30 and boxXToDraw < 40) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif (boxXToDraw >= 50 and boxXToDraw < 60) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 40 and boxYToDraw < 50) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxYToDraw >= 50 and boxYToDraw < 60) then
+						if (boxXToDraw >= 30 and boxXToDraw < 40) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif (boxXToDraw >= 50 and boxXToDraw < 60) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 60 and boxYToDraw < 70) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
 
+			--16
+			when "000000010000" =>
+			-- for the "1"
+				if (boxXToDraw >= 15 and boxXToDraw < 43) then
+					if (boxYToDraw >= 24 and boxYToDraw < 34) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxYToDraw >= 34 and boxYToDraw < 53) then
+						if (boxXToDraw >= 24 and boxXToDraw < 34) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 53 and boxYToDraw < 64) then
+						if (boxXToDraw >= 15 and boxXToDraw < 34) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					end if;
+				-- for the "6"
+				elsif (boxXToDraw >= 47 and boxXToDraw < 75) then
+					if (boxYToDraw >= 24 and boxYToDraw < 32) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxYToDraw >= 32 and boxYToDraw < 40) then
+						if (boxXToDraw >= 47 and boxXToDraw < 56) then	
+							number_color <= "11111111";
+							draw_number <= '1';
+						elsif (boxXToDraw >= 66 and boxXToDraw < 75) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
+						if (boxXToDraw >= 47 and boxXToDraw < 56) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 48 and boxYToDraw < 56) then
+						if (boxXToDraw >= 47 and boxXToDraw < 56) then
+							number_color <= "11111111";
+							draw_number <= '1';
+						end if;
+					elsif (boxYToDraw >= 56 and boxYToDraw < 64) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;		
+			
+			--32
+			when "000000100000" =>
+			--for the "3"
+			if (boxXToDraw >= 15 and boxXToDraw < 43) then
+				if (boxYToDraw >= 24 and boxYToDraw < 32) then
+					number_color <= "11111111";
+					draw_number <= '1';					
+				elsif (boxYToDraw >= 32 and boxYToDraw < 40) then
+					if (boxXToDraw >= 34 and boxXToDraw < 43) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 56) then
+					if (boxXToDraw >= 34 and boxXToDraw < 43) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 56 and boxYToDraw < 64) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "2"
+			elsif (boxXToDraw >= 47 and boxXToDraw < 75) then
+				if (boxYToDraw >= 24 and boxYToDraw < 32) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 32 and boxYToDraw < 40) then
+					if (boxXToDraw >= 47 and boxXToDraw < 56) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 56) then
+					if (boxXToDraw >= 66 and boxXToDraw < 75) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 56 and boxYToDraw < 64) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;			
+			
+			--64
+			when "000001000000" =>
+			-- for the "6"
+			if (boxXToDraw >= 15 and boxXToDraw < 43) then
+				if (boxYToDraw >= 24 and boxYToDraw < 32) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 32 and boxYToDraw < 40) then
+					if (boxXToDraw >= 15 and boxXToDraw < 24) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 34 and boxXToDraw < 43) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 56) then
+					if (boxXToDraw >= 15 and boxXToDraw < 24) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 56 and boxYToDraw < 64) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			-- for the "4"
+			elsif (boxXToDraw >= 47 and boxXToDraw < 75) then
+				if (boxYToDraw >= 24 and boxYToDraw < 40) then
+					if (boxXToDraw >= 66 and boxXToDraw < 75) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 64) then
+					if (boxXToDraw >= 47 and boxXToDraw < 56) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 66 and boxXToDraw < 75) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+			end if;
 
+			--128
+			when "000010000000" =>
+			--for the "1"
+			if (boxXToDraw >= 16 and boxXToDraw < 25) then
+				if (boxYToDraw >= 24 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			if (boxXToDraw >= 9 and boxXToDraw < 25) then
+				if (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			if (boxXToDraw >= 9 and boxXToDraw < 32) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			--for the "2"
+			if (boxXToDraw >= 34 and boxXToDraw < 56) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 34 and boxXToDraw < 43) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then 
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 47 and boxXToDraw < 56) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			--for the "8"
+			if (boxXToDraw >= 58 and boxXToDraw < 81) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 42) then
+					if (boxXToDraw >= 58 and boxXToDraw < 65) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 74 and boxXToDraw < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 57) then
+					if (boxXToDraw >= 58 and boxXToDraw < 65) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 74 and boxXToDraw < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			
+			-- 256
+			when "000100000000" =>
+			--for the "2"
+			if (boxXToDraw >= 9 and boxXToDraw < 32) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 9 and boxXToDraw < 18) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 22 and boxXToDraw < 32) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "5"
+			elsif (boxXToDraw >= 34 and boxXToDraw < 56) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 46 and boxXToDraw < 56) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 34 and boxYToDraw < 42) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "6"
+			elsif (boxXToDraw >= 58 and boxXToDraw <= 81) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 58 and boxXToDraw <= 66) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 73 and boxXToDraw < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 58 and boxXToDraw < 66) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			
+			--512
+			when "001000000000" =>
+			-- for the "5"
+			if (boxXToDraw >= 9 and boxXToDraw < 32) then
+				if (boxYToDraw >= 24 and boxYToDraw <= 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 24 and boxXToDraw < 32) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 9 and boxXToDraw < 18) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			-- for the "1"
+			elsif (boxXToDraw >= 34 and boxXToDraw < 56) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 57) then
+					if (boxXToDraw >= 40 and boxXToDraw < 49) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					if (boxXToDraw >= 34 and boxXToDraw < 49) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+			--for the "2"
+			elsif (boxXToDraw >= 58 and boxXToDraw < 81) then
+				if (boxYToDraw >= 24 and boxYToDraw < 33) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 33 and boxYToDraw < 41) then
+					if (boxXToDraw >= 58 and boxXToDraw < 67) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 41 and boxYToDraw < 49) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
+					if (boxXToDraw >= 72 and boxXToDraw < 81) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 57 and boxYToDraw < 66) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+			
+			--1024
+			when "010000000000" =>
+			--for the "1"
+			if (boxXToDraw >= 6 and boxXToDraw < 24) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 54) then
+					if (boxXToDraw >= 12 and boxXToDraw < 18) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					if (boxXToDraw >= 6 and boxXToDraw < 18) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+			--for the "0"
+			elsif (boxXToDraw >= 26 and boxXToDraw < 44) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 54) then
+					if (boxXToDraw >= 26 and boxXToDraw < 32) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 38 and boxXToDraw < 44) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "2"
+			elsif (boxXToDraw >= 46 and boxXToDraw < 64) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 42) then
+					if (boxXToDraw >= 46 and boxXToDraw < 52) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 54) then
+					if (boxXToDraw >= 58 and boxXToDraw < 64) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "4"
+			elsif (boxXToDraw >= 66 and boxXToDraw < 84) then
+				if (boxYToDraw >= 30 and boxYToDraw < 42) then
+					if (boxXToDraw >= 78 and boxXToDraw < 84) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 60) then
+					if (boxXToDraw >= 66 and boxXToDraw < 72) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 78 and boxXToDraw < 84) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+			end if;
+			
+			--2048
+			when others =>
+			--for the "2"
+			if (boxXToDraw >= 6 and boxXToDraw < 24) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 42) then
+					if (boxXToDraw >= 6 and boxXToDraw < 12) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 54) then
+					if (boxXToDraw >= 18 and boxXToDraw < 24) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "0"
+			elsif (boxXToDraw >= 26 and boxXToDraw < 44) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 54) then
+					if (boxXToDraw >= 26 and boxXToDraw < 32) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 38 and boxXToDraw < 44) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			--for the "4"
+			elsif (boxXToDraw >= 46 and boxXToDraw < 64) then
+				if (boxYToDraw >= 30 and boxYToDraw < 42) then
+					if (boxXToDraw >= 58 and boxXToDraw < 64) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 60) then
+					if (boxXToDraw >= 46 and boxXToDraw < 52) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 58 and boxXToDraw < 64) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				end if;
+			--for the "8"
+			elsif (boxXToDraw >= 66 and boxXToDraw < 84) then
+				if (boxYToDraw >= 30 and boxYToDraw < 36) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 36 and boxYToDraw < 42) then
+					if (boxXToDraw >= 66 and boxXToDraw < 72) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 78 and boxXToDraw < 84) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 42 and boxYToDraw < 48) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				elsif (boxYToDraw >= 48 and boxYToDraw < 54) then
+					if (boxXToDraw >= 66 and boxXToDraw < 72) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					elsif (boxXToDraw >= 78 and boxXToDraw < 84) then
+						number_color <= "11111111";
+						draw_number <= '1';
+					end if;
+				elsif (boxYToDraw >= 54 and boxYToDraw < 60) then
+					number_color <= "11111111";
+					draw_number <= '1';
+				end if;
+			end if;
+		end case;
+	end process;
+	--combined box drawing logic
 
-
+	drawBox_combined <= drawBox16 & drawBox15 & drawBox14 & drawBox13 & drawBox12 & drawBox11 & drawBox10 &
+								drawBox9 & drawBox8 & drawBox7 & drawBox6 & drawBox5 & drawBox4 & drawBox3 & drawBox2 &
+								drawBox1;
 end Behavioral;
 
