@@ -84,7 +84,7 @@ begin
 		if(rst = '1') then
 			boxValues <= (others => (others => '0'));
 			btn_edgedet <= (others => '0');
-			state_reg <= idle;
+			state_reg <= randUpdate;
 			btn_posedge <= (others => '0');
 			score_reg <= (others => '0');
 			merge_reg <= (others => '0');
