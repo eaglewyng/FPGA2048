@@ -26,8 +26,6 @@ architecture Behavioral of Grid is
 	--grid signals
 	signal gridOn : std_logic;
 	signal rgbWire : std_logic_vector(7 downto 0);
-	signal rgb1,rgb2,rgb3,rgb4,rgb5,rgb6,rgb7,rgb8,rgb9,rgb10,rgb11,
-	rgb12,rgb13,rgb14,rgb15,rgb16 : std_logic_vector(7 downto 0);
 	signal drawBox1,drawBox2,drawBox3,drawBox4,drawBox5,drawBox6,drawBox7,drawBox8,drawBox9,
 	drawBox10,drawBox11,drawBox12,drawBox13,drawBox14,drawBox15,drawBox16 : std_logic;
 	signal box1x,box2x,box3x,box4x,box5x,box6x,box7x,box8x,box9x,
@@ -392,7 +390,7 @@ rgbOut <= rgbWire;
 	
 	
 
-	process(btn_posedge, boxValues, state_reg, random_num)
+	process(btn_posedge, boxValues, state_reg, random_num, score_reg, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
 	begin
 		boxValues_next <= boxValues;
 		gameOver <= '0';
@@ -1174,7 +1172,9 @@ rgbOut <= rgbWire;
 	score <= STD_LOGIC_VECTOR(score_reg);
 	
 	--find the array index of the box to draw
-	process(drawBox_combined)
+	process(drawBox_combinedbox1x,box2x,box3x,box4x,box5x,box6x,box7x,box8x,box9x,
+		box10x,box11x,box12x,box13x,box14x,box15x,box16x, boxValues, box1y,box2y,box3y,box4y,box5y,box6y,box7y,box8y,box9y,
+		box10y,box11y,box12y,box13y,box14y,box15y,box16y)
 	begin
 		case drawBox_combined is
 			when "0000000000000001" =>
