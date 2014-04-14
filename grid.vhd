@@ -87,12 +87,14 @@ begin
 			state_reg <= idle;
 			btn_posedge <= (others => '0');
 			score_reg <= (others => '0');
+			merge_reg <= (others => '0');
 		elsif(clk'event and clk = '1') then
 			boxValues <= boxValues_next;
 			btn_edgedet <= btn_edgedet_next;
 			state_reg <= state_next;
 			btn_posedge <= btn_posedge_next;
 			score_reg <= score_next;
+			merge_reg <= merge_next;
 		end if;
 	end process;
 	
@@ -393,7 +395,7 @@ rgbOut <= rgbWire;
 	
 	
 
-	process(btn_posedge, boxValues, state_reg, random_num, score_reg, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0)
+	process(btn_posedge, boxValues, state_reg, random_num, score_reg, btn_posedge3, btn_posedge2, btn_posedge1, btn_posedge0, merge_reg)
 	begin
 		boxValues_next <= boxValues;
 		gameOver <= '0';
@@ -406,7 +408,7 @@ rgbOut <= rgbWire;
 			merge_next <= (others => '0');
 			if(unsigned(btn_posedge) > 0) then
 				state_next <= merge1;
-				score_reg <= score_reg + 1;
+				score_next <= score_reg + 1;
 			else
 				btn_posedge_next <= btn_posedge3 & btn_posedge2 & btn_posedge1 & btn_posedge0;
 			end if;
