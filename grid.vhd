@@ -108,24 +108,10 @@ draw_grid <= '1' when unsigned(rgbWire) > 0 else
 ---------------------------------------------------------------
 --				Grid/Box Color Logic
 ---------------------------------------------------------------
-rgbWire <= rgb1 when drawbox1 = '1' else
-			  rgb2 when drawbox2 = '1' else
-			  rgb3 when drawbox3 = '1' else
-			  rgb4 when drawbox4 = '1' else
-			  rgb5 when drawbox5 = '1' else
-			  rgb6 when drawbox6 = '1' else
-		 	  rgb7 when drawbox7 = '1' else
-			  rgb8 when drawbox8 = '1' else
-	 		  rgb9 when drawbox9 = '1' else
-			  rgb10 when drawbox10 = '1' else
-			  rgb11 when drawbox11 = '1' else
-		 	  rgb12 when drawbox12 = '1' else
-			  rgb13 when drawbox13 = '1' else
-			  rgb14 when drawbox14 = '1' else
-			  rgb15 when drawbox15 = '1' else
-			  rgb16 when drawbox16 = '1' else
+rgbWire <= boxFinalRGB when UNSIGNED(drawbox_combined) > 0 else
 			  grid_color when gridOn = '1' else
 			  "00000000";
+				
 			 
 rgbOut <= rgbWire;
 
@@ -153,8 +139,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(0),
-					rgb_color => rgb1,
+					posXPixOut => box1x,
+					posYPixOut => box1y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox1
@@ -169,8 +155,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(1),
-					rgb_color => rgb2,
+					posXPixOut => box2x,
+					posYPixOut => box2y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox2
@@ -185,8 +171,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(2),
-					rgb_color => rgb3,
+					posXPixOut => box3x,
+					posYPixOut => box3y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox3
@@ -201,8 +187,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(3),
-					rgb_color => rgb4,
+					posXPixOut => box4x,
+					posYPixOut => box4y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox4
@@ -217,8 +203,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(4),
-					rgb_color => rgb5,
+					posXPixOut => box5x,
+					posYPixOut => box5y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox5
@@ -233,8 +219,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(5),
-					rgb_color => rgb6,
+					posXPixOut => box6x,
+					posYPixOut => box6y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox6
@@ -249,8 +235,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(6),
-					rgb_color => rgb7,
+					posXPixOut => box7x,
+					posYPixOut => box7y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox7
@@ -265,8 +251,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(7),
-					rgb_color => rgb8,
+					posXPixOut => box8x,
+					posYPixOut => box8y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox8
@@ -281,8 +267,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(8),
-					rgb_color => rgb9,
+					posXPixOut => box9x,
+					posYPixOut => box9y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox9
@@ -297,8 +283,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(9),
-					rgb_color => rgb10,
+					posXPixOut => box10x,
+					posYPixOut => box10y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox10
@@ -313,8 +299,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(10),
-					rgb_color => rgb11,
+					posXPixOut => box11x,
+					posYPixOut => box11y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox11
@@ -329,8 +315,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(11),
-					rgb_color => rgb12,
+					posXPixOut => box12x,
+					posYPixOut => box12y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox12
@@ -346,8 +332,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(12),
-					rgb_color => rgb13,
+					posXPixOut => box13x,
+					posYPixOut => box13y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox13
@@ -363,8 +349,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(13),
-					rgb_color => rgb14,
+					posXPixOut => box14x,
+					posYPixOut => box14y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox14
@@ -380,8 +366,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(14),
-					rgb_color => rgb15,
+					posXPixOut => box15x,
+					posYPixOut => box15y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox15
@@ -396,8 +382,8 @@ rgbOut <= rgbWire;
 	port map(
 					pixel_x => pixel_x,
 					pixel_y => pixel_y,
-					value => boxValues(15),
-					rgb_color => rgb16,
+					posXPixOut => box16x,
+					posYPixOut => box16y,
 					--this signal is so we can tell whether we should actually draw the color
 					--being output by the box or not!
 					drawBox => drawBox16
