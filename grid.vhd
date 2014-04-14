@@ -16,7 +16,8 @@ entity Grid is
 				btn : in std_logic_vector(3 downto 0);
 				draw_grid : out std_logic;
 				rgbOut : out std_logic_vector(7 downto 0);
-				gameOver : out std_logic
+				gameOver : out std_logic;
+				score : out std_logic_vector(15 downto 0)
 	);
 end Grid;
 
@@ -36,7 +37,7 @@ architecture Behavioral of Grid is
 
 	-- 16 wires of 12 bits each
 	type value is array (15 downto 0) of unsigned(11 downto 0);
-	signal boxValues, boxValues_next, boxValues_nextFinal: value;
+	signal boxValues, boxValues_next: value;
 	signal btn_edgedet, btn_edgedet_next : STD_LOGIC_VECTOR(3 downto 0);
 	signal btn_posedge0, btn_posedge1, btn_posedge2, btn_posedge3 : STD_LOGIC;
 	signal btn_posedge : STD_LOGIC_VECTOR(3 downto 0);
@@ -1175,7 +1176,7 @@ rgbOut <= rgbWire;
 	
 	
 	
-	
+	score <= STD_LOGIC_VECTOR(score_reg);
 	
 
 	

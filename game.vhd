@@ -26,7 +26,6 @@ architecture Behavioral of Game is
 
 --GAME SIGNALS
 signal rst : std_logic;
-signal score : natural;
 type state is (start, playing, endGame);
 signal state_reg, state_next : state; 
 signal rgbOut : std_logic_vector(7 downto 0);
@@ -72,6 +71,8 @@ signal pixel_y : std_logic_vector(9 downto 0);
    signal deb_counter_out, deb_counter_next : UNSIGNED(COUNTER_SIZE downto 0) := (OTHERS => '0'); --counter output
 	signal btn_debounced, btn_debounced_next : STD_LOGIC_VECTOR(3 downto 0);
 	signal counter_set : STD_LOGIC;
+	signal ssd_data_in : STD_LOGIC_VECTOR(15 downto 0);
+	
 	
 	
 
@@ -163,13 +164,14 @@ begin
 				btn => btn_debounced,
 				draw_grid => draw_grid,
 				rgbOut => rgbFromGrid,
-				gameOver => game_over
+				gameOver => game_over,
+				score => ssd_data_in
 				);
 
 	SevenSeg : entity work.seven_segment_display
 	port map(
 				clk => clk,
-				data_in => "1111111111111111", 
+				data_in => ssd_data_in, 
 				dp_in => "1111",
 				blank => "0000",
 				seg => seg,
