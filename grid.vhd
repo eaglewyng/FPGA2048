@@ -1429,10 +1429,8 @@ rgbOut <= rgbWire;
 							draw_number <= '1';
 						end if;
 					elsif (boxYToDraw >= 40 and boxYToDraw < 48) then
-						if (boxXToDraw >= 47 and boxXToDraw < 56) then
-							number_color <= "11111111";
-							draw_number <= '1';
-						end if;
+						number_color <= "11111111";
+						draw_number <= '1';
 					elsif (boxYToDraw >= 48 and boxYToDraw < 56) then
 						if (boxXToDraw >= 47 and boxXToDraw < 56) then
 							number_color <= "11111111";
@@ -1652,7 +1650,7 @@ rgbOut <= rgbWire;
 					number_color <= "11111111";
 					draw_number <= '1';
 				elsif (boxYToDraw >= 49 and boxYToDraw < 57) then
-					if (boxXToDraw >= 34 and boxYToDraw < 42) then
+					if (boxXToDraw >= 34 and boxXToDraw < 42) then
 						number_color <= "11111111";
 						draw_number <= '1';
 					end if;
